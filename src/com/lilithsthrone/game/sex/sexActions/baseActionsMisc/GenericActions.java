@@ -1240,6 +1240,7 @@ public class GenericActions {
 			Sex.stopAllOngoingActions(Sex.getCharacterTargetedForSexAction(this), Sex.getCharacterTargetedForSexAction(this));
 			
 			Sex.addCharacterForbiddenByOthersFromPositioning(Sex.getCharacterTargetedForSexAction(this));
+			((NPC)Sex.getCharacterTargetedForSexAction(this)).generateSexChoices(false, Main.game.getPlayer());
 		}
 	};
 	
