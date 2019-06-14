@@ -13008,6 +13008,10 @@ public abstract class GameCharacter implements XMLSaving {
 		if(modifiers.contains(FluidModifier.ALCOHOLIC)) { //TODO factor in body size:
 			fluidIngestionSB.append(this.incrementAlcoholLevel(millilitres * 0.001f));
 		}
+
+		if(modifiers.contains(FluidModifier.CORRUPTING)) {
+			fluidIngestionSB.append(this.addCorruptingFluidIngested(fluid.getType(), millilitres));
+		}
 		
 		if(modifiers.contains(FluidModifier.HALLUCINOGENIC)) {
 			this.addPsychoactiveFluidIngested(fluid.getType());
@@ -13240,7 +13244,25 @@ public abstract class GameCharacter implements XMLSaving {
 		}
 		return false;
 	}
-	
+
+	public String addCorruptingFluidIngested(FluidType fluidType, float millilitres) {
+		// Using fl oz gives us a better spread of corruption since log increases quite slowly with larger numbers.
+		float floz = millilitres / 29.574f;
+		float corruption = Math.round(Math.log(floz) * 3) / 10f;
+		// Min ml amount needed to produce corruption level
+		//   15mL -> 0.1c        68mL -> 0.3c       133mL -> 0.5c
+		//  701mL -> 1.0c	   3715mL -> 1.5c     19671mL -> 2.0c
+
+		if (corruption > 0f) {
+			incrementAttribute(Attribute.MAJOR_CORRUPTION, corruption);
+			return "<p>"
+				+ "Due to the corrupting properties of the "+fluidType.getName(null)+", "
+				+ (isPlayer() ? "you gain" : UtilText.parse(this, "[npc.Name] gains"))
+				+ " <b style='color:"+Attribute.MAJOR_CORRUPTION.getColour().toWebHexString()+";'>"+corruption+" corruption</b>!"
+				+ "</p>";
+		}
+		return "";
+	}
 	
 	// Combat:
 
