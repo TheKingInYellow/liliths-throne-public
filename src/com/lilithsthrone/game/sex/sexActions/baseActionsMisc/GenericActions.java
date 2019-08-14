@@ -1065,7 +1065,6 @@ public class GenericActions {
 			Sex.stopAllOngoingActions(Sex.getCharacterTargetedForSexAction(this), Sex.getCharacterTargetedForSexAction(this));
 			
 			Sex.addCharacterForbiddenByOthersFromPositioning(Sex.getCharacterTargetedForSexAction(this));
-			((NPC)Sex.getCharacterTargetedForSexAction(this)).generateSexChoices(false, Main.game.getPlayer());
 		}
 	};
 	
@@ -1109,11 +1108,6 @@ public class GenericActions {
 		public void applyEffects() {
 			GameCharacter target = Sex.getCharacterTargetedForSexAction(this);
 			Sex.removeCharacterForbiddenByOthersFromPositioning(Sex.getCharacterTargetedForSexAction(this));
-			for(GameCharacter participant : Sex.getAllParticipants()) {
-				if(!participant.equals(target) && Sex.getSexPositionSlot(participant)!=SexSlotGeneric.MISC_WATCHING) {
-					((NPC)target).generateSexChoices(false, participant, null);
-				}
-			}
 		}
 	};
 	
