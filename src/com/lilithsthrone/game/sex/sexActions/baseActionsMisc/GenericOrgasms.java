@@ -226,9 +226,9 @@ public class GenericOrgasms {
 			} else {
 				if(!ongoingProstateStimulators.isEmpty()) {
 					genericOrgasmSB.append(UtilText.parse(ongoingProstateStimulators.get(0), characterOrgasming,
-							" At this moment, [npc.namePos] [npc.verb(curl)] [npc.her] [npc.fingers+] up inside [npc2.namePos] "+(characterOrgasming.hasVagina()?"[npc2.pussy+]":"[npc2.asshole+]")+","
-								+ " before rapidly stroking and massaging [npc2.her] prostate in an attempt to milk as much [npc2.cum] out of [npc2.herHim] as possible."
-								+ " Immediately, [npc2.her] body reacts to this added stimulation, and as [npc2.her] [npc2.cock+] starts twitching, [npc2.she] [npc2.verb(feel)] [npc2.her] [npc2.balls+] tightening as [npc2.she] [npc2.verb(start)] to cum."));
+							" At this moment, [npc.namePos] [npc.verb(curl)] [npc.her] [npc.fingers+] up inside [npc2.namePos] [npc2.asshole+],"
+								+ " before rapidly stroking and massaging [npc2.her] prostate in an attempt to milk as much [npc2.cum] as possible out of [npc2.herHim]."
+								+ " Immediately, [npc2.her] body reacts to this added stimulation, and as [npc.her] [npc.cock+] starts twitching, [npc.she] [npc.verb(feel)] [npc.her] [npc.balls+] tightening as [npc.she] [npc.verb(start)] to cum."));
 				} else {
 					genericOrgasmSB.append(" [npc.NamePos] [npc.cock+] twitches, and [npc.she] [npc.verb(feel)] [npc.her] [npc.balls+] tightening as [npc.she] [npc.verb(start)] to cum.");
 				}
@@ -2647,6 +2647,12 @@ public class GenericOrgasms {
 			}
 			
 			SexAreaInterface areaContacted = Sex.getAllContactingSexAreas(Sex.getCharacterPerformingAction(), SexAreaPenetration.PENIS).get(0);
+
+			GameCharacter secondaryTarget = getSecondaryCreampieTarget(Sex.getCharacterTargetedForSexAction(this), (SexAreaOrifice) areaContacted);
+			
+			if(secondaryTarget==null) {
+				return false;
+			}
 			
 			if(areaContacted.isPenetration()) {
 				return false;

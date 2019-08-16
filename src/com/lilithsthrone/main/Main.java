@@ -88,7 +88,7 @@ public class Main extends Application {
 		"<p>"
 			+ "Hello again!"
 		+ "</p>"
-		
+
 		+ "<p>"
 			+ "There were quite a few bugs in v0.3.4, with a few of them being quite major, so I decided to get this hotfix out earlier than I'd originally planned in order to address them."
 			+ " Hopefully everything should be working ok now, but if there are still some big bugs which I've somehow missed, I'll get another hotfix out (but I really don't think this will be needed)."
@@ -436,7 +436,7 @@ public class Main extends Application {
 		credits.add(new CreditsSlot("Moro", "", 0, 0, 0, 0, Subspecies.DEMON));
 		credits.add(new CreditsSlot("Neo", "", 0, 0, 0, 0, Subspecies.DEMON));
 		credits.add(new CreditsSlot("Abaddon_TMZ", "", 0, 0, 0, 0, Subspecies.DEMON));
-		
+
 		
 		
 		credits.add(new CreditsSlot("Adhana Konker", "", 0, 0, 3, 0));

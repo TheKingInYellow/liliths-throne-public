@@ -1890,7 +1890,7 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 	public String getCannotBeEquippedText(GameCharacter clothingOwner, InventorySlot slot) { // ...
 		BodyPartClothingBlock block = slot.getBodyPartClothingBlock(clothingOwner);
 		List<ItemTag> tags = this.getItemTags(slot);
-		
+
 		if(!this.getEquipSlots().contains(slot)) {
 			return  UtilText.parse("[style.colourBad(The "+this.getName()+" cannot be equipped into this slot!)]");
 		}
@@ -2053,7 +2053,7 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 
 	public List<BlockedParts> getBlockedPartsMap(GameCharacter character, InventorySlot slotEquippedTo) {
 		List<ItemTag> tags = this.getItemTags(slotEquippedTo);
-		
+
 		if(character!=null) {
 			boolean replaceCrotchBoobAccess = false;
 			boolean replaceGroinAccess = false;
@@ -2803,6 +2803,14 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 		if(!itemTags.containsKey(slotEquippedTo)) {
 			return new ArrayList<>();
 		}
+		return itemTags.get(slotEquippedTo);
+	}
+
+	public List<ItemTag> getDefaultItemTags() {
+		return itemTags.get(this.equipSlots.get(0));
+	}
+
+	public List<ItemTag> getItemTags(InventorySlot slotEquippedTo) {
 		return itemTags.get(slotEquippedTo);
 	}
 

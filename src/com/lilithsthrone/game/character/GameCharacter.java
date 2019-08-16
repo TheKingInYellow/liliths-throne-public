@@ -3550,7 +3550,7 @@ public abstract class GameCharacter implements XMLSaving {
 			long age = ChronoUnit.YEARS.between(birthday, Main.game.getDateNow());
 			if(age<MINIMUM_AGE) {
 				this.birthday = (this.getBirthday().minusYears(MINIMUM_AGE-age));
-				
+
 			} else if(age>50) {
 				this.birthday = (this.getBirthday().plusYears(age-50));
 			}

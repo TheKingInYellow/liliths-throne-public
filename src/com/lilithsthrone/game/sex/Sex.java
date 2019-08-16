@@ -4749,7 +4749,7 @@ public class Sex {
 		return Sex.getSexControl(target).getValue()>=Sex.getSexControl(character).getValue()
 				|| character.getFetishDesire(Fetish.FETISH_SUBMISSIVE).isPositive();
 	}
-	
+
 	/**
 	 * @param character The character who is thinking about pulling out.
 	 * @return A positive value if they want to obey requests to pull out, or a negative value if they want to obey request to creampie. 0 is no requests.
