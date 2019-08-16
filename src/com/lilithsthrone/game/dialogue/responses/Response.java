@@ -246,8 +246,8 @@ public class Response {
 	 * @return true if this action has no requirements, or if all requirements are met.
 	 */
 	public boolean isAvailable(){
-		if(hasRequirements()) {
-			return (isBaseCorruptionWithinRange() || isAvailableFromFetishes() || (corruptionBypass==null && fetishesRequired==null))
+		return !hasRequirements()
+				|| ((isCorruptionWithinRange() || isAvailableFromFetishes() || (corruptionBypass==null && fetishesRequired==null))
 					&& !isBlockedFromPerks()
 					&& isFemininityInRange()
 					&& isRequiredRace()
@@ -258,31 +258,13 @@ public class Response {
 	 * @return true if this action is not available from the requirements, and is instead available due to being able to bypass the corruption requirements.
 	 */
 	public boolean isAbleToBypass(){
-		if(!isAvailable()) {
-			if (Main.game.isSpittingDisabled() && fetishesRequired != null && fetishesRequired.contains(Fetish.FETISH_TRANSFORMATION_RECEIVING))
-				return true;
-
-			if (!Main.getProperties().hasValue(PropertyValue.bypassSexActions)) {
-				if (!isCorruptionWithinRange()
-						&& sexActionType != SexActionType.ORGASM
-						&& sexActionType != SexActionType.ORGASM_NO_AROUSAL_RESET) {
-					return false;
-				}
-			}
-
-			if (isBlockedFromPerks())
-				return false;
-
-			if (!isFemininityInRange())
-				return false;
-
-			if (!isRequiredRace())
-				return false;
-
-			if (isAvailableFromAdditionalOngoingAvailableMap() || (isPenetrationTypeAvailable() && isOrificeTypeAvailable()))
-				return true;
-
-			return false;
+		if(!isAvailable()
+				&& (!Main.game.isInSex() || Main.getProperties().hasValue(PropertyValue.bypassSexActions))
+				&& (!isBlockedFromPerks()
+						&& isFemininityInRange()
+						&& isRequiredRace()
+						&& (isAvailableFromAdditionalOngoingAvailableMap() || (isPenetrationTypeAvailable() && isOrificeTypeAvailable())))) {
+			return !isCorruptionWithinRange() && !isAvailableFromFetishes();
 		}
 		
 		return false;
