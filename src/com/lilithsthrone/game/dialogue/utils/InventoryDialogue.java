@@ -3871,7 +3871,7 @@ public class InventoryDialogue {
 											"You cannot give away the " + clothing.getName() + "!",
 											null);
 								}
-								if(!inventoryNPC.isOverrideInventoryEquip() && !clothing.getClothingType().isCondom() && inventoryNPC.isUnique() && (!inventoryNPC.isSlave() || !inventoryNPC.getOwner().isPlayer())) {
+								if(!inventoryNPC.isOverrideInventoryEquip() && !clothing.getClothingType().isCondom(slot) && inventoryNPC.isUnique() && (!inventoryNPC.isSlave() || !inventoryNPC.getOwner().isPlayer())) {
 									return new Response(
 											UtilText.parse(inventoryNPC, "Equip: "+Util.capitaliseSentence(slot.getName())+" ([npc.Name])"),
 											UtilText.parse(inventoryNPC, "As [npc.name] is a unique character, who is not your slave, you cannot force [npc.herHim] to wear the "+clothing.getName()+"."),
@@ -3951,7 +3951,7 @@ public class InventoryDialogue {
 							} else if(index >= 6 && index <= 9 && index-6<clothing.getClothingType().getEquipSlots().size()) { //TODO
 								InventorySlot slot = clothing.getClothingType().getEquipSlots().get(index-6);
 								if(clothing.isCanBeEquipped(Main.game.getPlayer(), slot)) {
-									if(clothing.getClothingType().isAbleToBeEquippedDuringSex()) {
+									if(clothing.getClothingType().isAbleToBeEquippedDuringSex(slot)) {
 										if(!Sex.getInitialSexManager().isAbleToEquipSexClothing(Main.game.getPlayer())) {
 											return new Response("Equip: "+Util.capitaliseSentence(slot.getName()), "As this is a special sex scene, you cannot equip clothing during it!", null);
 										}
@@ -3988,14 +3988,14 @@ public class InventoryDialogue {
 											"You cannot give away the " + clothing.getName() + "!",
 											null);
 								}
-								if(!inventoryNPC.isOverrideInventoryEquip() && !clothing.getClothingType().isCondom() && inventoryNPC.isUnique() && (!inventoryNPC.isSlave() || !inventoryNPC.getOwner().isPlayer())) {
+								if(!inventoryNPC.isOverrideInventoryEquip() && !clothing.getClothingType().isCondom(slot) && inventoryNPC.isUnique() && (!inventoryNPC.isSlave() || !inventoryNPC.getOwner().isPlayer())) {
 									return new Response(
 											UtilText.parse(inventoryNPC, "Equip: "+Util.capitaliseSentence(slot.getName())+" ([npc.Name])"),
 											UtilText.parse(inventoryNPC, "As [npc.name] is a unique character, who is not your slave, you cannot force [npc.herHim] to wear the "+clothing.getName()+"."),
 											null);
 								}
 								if(clothing.isCanBeEquipped(inventoryNPC, slot)) {
-									if(clothing.getClothingType().isAbleToBeEquippedDuringSex()) {
+									if(clothing.getClothingType().isAbleToBeEquippedDuringSex(slot)) {
 										if(!Sex.getInitialSexManager().isAbleToEquipSexClothing(inventoryNPC)) {
 											return new Response(
 													UtilText.parse(inventoryNPC, "Equip: "+Util.capitaliseSentence(slot.getName())+" ([npc.Name])"),
@@ -4511,7 +4511,7 @@ public class InventoryDialogue {
 
 							} else if(index >= 11 && index <= 14 && index-11<clothing.getClothingType().getEquipSlots().size()) {
 								InventorySlot slot = clothing.getClothingType().getEquipSlots().get(index-11);
-								if(!inventoryNPC.isOverrideInventoryEquip() && !clothing.getClothingType().isCondom() && inventoryNPC.isUnique() && (!inventoryNPC.isSlave() || !inventoryNPC.getOwner().isPlayer())) {
+								if(!inventoryNPC.isOverrideInventoryEquip() && !clothing.getClothingType().isCondom(slot) && inventoryNPC.isUnique() && (!inventoryNPC.isSlave() || !inventoryNPC.getOwner().isPlayer())) {
 									return new Response(
 											UtilText.parse(inventoryNPC, "Equip: "+Util.capitaliseSentence(slot.getName())+" ([npc.Name])"),
 											UtilText.parse(inventoryNPC, "As [npc.name] is a unique character, who is not your slave, you cannot force [npc.herHim] to wear the "+clothing.getName()+"."),
@@ -4593,7 +4593,7 @@ public class InventoryDialogue {
 							} else if(index >= 6 && index <= 9 && index-6<clothing.getClothingType().getEquipSlots().size()) { //TODO
 								InventorySlot slot = clothing.getClothingType().getEquipSlots().get(index-6);
 								if(clothing.isCanBeEquipped(Main.game.getPlayer(), slot)) {
-									if(clothing.getClothingType().isAbleToBeEquippedDuringSex() && !inventoryNPC.isTrader()) {
+									if(clothing.getClothingType().isAbleToBeEquippedDuringSex(slot) && !inventoryNPC.isTrader()) {
 										if(!Sex.getInitialSexManager().isAbleToEquipSexClothing(Main.game.getPlayer())) {
 											return new Response("Equip: "+Util.capitaliseSentence(slot.getName()), "As this is a special sex scene, you cannot equip clothing during it!", null);
 										}
@@ -4624,14 +4624,14 @@ public class InventoryDialogue {
 
 							} else if(index >= 11 && index <= 14 && index-11<clothing.getClothingType().getEquipSlots().size()) {
 								InventorySlot slot = clothing.getClothingType().getEquipSlots().get(index-11);
-								if(!inventoryNPC.isOverrideInventoryEquip() && !clothing.getClothingType().isCondom() && inventoryNPC.isUnique() && (!inventoryNPC.isSlave() || !inventoryNPC.getOwner().isPlayer())) {
+								if(!inventoryNPC.isOverrideInventoryEquip() && !clothing.getClothingType().isCondom(slot) && inventoryNPC.isUnique() && (!inventoryNPC.isSlave() || !inventoryNPC.getOwner().isPlayer())) {
 									return new Response(
 											UtilText.parse(inventoryNPC, "Equip: "+Util.capitaliseSentence(slot.getName())+" ([npc.Name])"),
 											UtilText.parse(inventoryNPC, "As [npc.name] is a unique character, who is not your slave, you cannot force [npc.herHim] to wear the "+clothing.getName()+"."),
 											null);
 								}
 								if(clothing.isCanBeEquipped(inventoryNPC, slot)) {
-									if(clothing.getClothingType().isAbleToBeEquippedDuringSex() && !inventoryNPC.isTrader()) {
+									if(clothing.getClothingType().isAbleToBeEquippedDuringSex(slot) && !inventoryNPC.isTrader()) {
 										if(!Sex.getInitialSexManager().isAbleToEquipSexClothing(inventoryNPC)) {
 											return new Response(
 													UtilText.parse(inventoryNPC, "Equip: "+Util.capitaliseSentence(slot.getName())+" ([npc.Name])"),
@@ -5269,6 +5269,7 @@ public class InventoryDialogue {
 			
 			// ****************************** ITEM BELONGS TO THE PLAYER ******************************
 			if(owner != null && owner.isPlayer()) {
+				InventorySlot slotEquippedTo = clothing.getSlotEquippedTo();
 				switch(interactionType) {
 					case COMBAT:
 						if (index == 1) {
@@ -5277,11 +5278,11 @@ public class InventoryDialogue {
 								if(!clothing.getClothingType().isAbleToBeDropped()) {
 									return new Response("Drop", "You cannot drop the " + clothing.getName() + "!", null);
 									
-								} else if(areaFull && !clothing.getClothingType().isDiscardedOnUnequip()) {
+								} else if(areaFull && !clothing.getClothingType().isDiscardedOnUnequip(slotEquippedTo)) {
 									return new Response("Drop", "This area is full, so you can't drop "+(owner.isPlayer()?"your":owner.getName("")+"'s")+" " + clothing.getName() + " here!", null);
 								} else {
-									return new Response((clothing.getClothingType().isDiscardedOnUnequip()?"Discard":"Drop"),
-											(clothing.getClothingType().isDiscardedOnUnequip()
+									return new Response((clothing.getClothingType().isDiscardedOnUnequip(slotEquippedTo)?"Discard":"Drop"),
+											(clothing.getClothingType().isDiscardedOnUnequip(slotEquippedTo)
 													?"Take off "+(owner.isPlayer()?"your":owner.getName("")+"'s")+" " + clothing.getName() + " and throw it away."
 													:"Drop "+(owner.isPlayer()?"your":owner.getName("")+"'s")+" " + clothing.getName() + "."),
 											Combat.ENEMY_ATTACK){
@@ -5301,11 +5302,11 @@ public class InventoryDialogue {
 								if(!clothing.getClothingType().isAbleToBeDropped()) {
 									return new Response("Store", "You cannot drop the " + clothing.getName() + "!", null);
 									
-								} else if(areaFull && !clothing.getClothingType().isDiscardedOnUnequip()) {
+								} else if(areaFull && !clothing.getClothingType().isDiscardedOnUnequip(slotEquippedTo)) {
 									return new Response("Store", "This area is full, so you can't store "+(owner.isPlayer()?"your":owner.getName("")+"'s")+" " + clothing.getName() + " here!", null);
 								} else {
-									return new Response((clothing.getClothingType().isDiscardedOnUnequip()?"Discard":"Store"),
-											(clothing.getClothingType().isDiscardedOnUnequip()
+									return new Response((clothing.getClothingType().isDiscardedOnUnequip(slotEquippedTo)?"Discard":"Store"),
+											(clothing.getClothingType().isDiscardedOnUnequip(slotEquippedTo)
 													?"Take off "+(owner.isPlayer()?"your":owner.getName("")+"'s")+" " + clothing.getName() + " and throw it away."
 													:"Store "+(owner.isPlayer()?"your":owner.getName("")+"'s")+" " + clothing.getName() + " in this area."),
 											Combat.ENEMY_ATTACK){
@@ -5342,7 +5343,7 @@ public class InventoryDialogue {
 								return new Response("Enchant", "You can't enchant equipped clothing!", null);
 							}
 							
-						} else if(index == 6 && !clothing.getClothingType().isDiscardedOnUnequip()) {
+						} else if(index == 6 && !clothing.getClothingType().isDiscardedOnUnequip(slotEquippedTo)) {
 							if (owner.isAbleToUnequip(clothing, false, Main.game.getPlayer())) {
 								return new Response("Unequip", "Unequip the " + clothing.getName() + ".", Combat.ENEMY_ATTACK){
 									@Override
@@ -5434,11 +5435,11 @@ public class InventoryDialogue {
 								if(!clothing.getClothingType().isAbleToBeDropped()) {
 									return new Response("Drop", "You cannot drop the " + clothing.getName() + "!", null);
 									
-								} else if(areaFull && !clothing.getClothingType().isDiscardedOnUnequip()) {
+								} else if(areaFull && !clothing.getClothingType().isDiscardedOnUnequip(slotEquippedTo)) {
 									return new Response("Drop", "This area is full, so you can't drop "+(owner.isPlayer()?"your":owner.getName("")+"'s")+" " + clothing.getName() + " here!", null);
 								} else {
-									return new Response((clothing.getClothingType().isDiscardedOnUnequip()?"Discard":"Drop"),
-											(clothing.getClothingType().isDiscardedOnUnequip()
+									return new Response((clothing.getClothingType().isDiscardedOnUnequip(slotEquippedTo)?"Discard":"Drop"),
+											(clothing.getClothingType().isDiscardedOnUnequip(slotEquippedTo)
 													?"Take off "+(owner.isPlayer()?"your":owner.getName("")+"'s")+" " + clothing.getName() + " and throw it away."
 													:"Drop "+(owner.isPlayer()?"your":owner.getName("")+"'s")+" " + clothing.getName() + "."),
 											INVENTORY_MENU){
@@ -5453,11 +5454,11 @@ public class InventoryDialogue {
 								if(!clothing.getClothingType().isAbleToBeDropped()) {
 									return new Response("Store", "You cannot drop the " + clothing.getName() + "!", null);
 									
-								} else if(areaFull && !clothing.getClothingType().isDiscardedOnUnequip()) {
+								} else if(areaFull && !clothing.getClothingType().isDiscardedOnUnequip(slotEquippedTo)) {
 									return new Response("Store", "This area is full, so you can't store "+(owner.isPlayer()?"your":owner.getName("")+"'s")+" " + clothing.getName() + " here!", null);
 								} else {
-									return new Response((clothing.getClothingType().isDiscardedOnUnequip()?"Discard":"Store"),
-											(clothing.getClothingType().isDiscardedOnUnequip()
+									return new Response((clothing.getClothingType().isDiscardedOnUnequip(slotEquippedTo)?"Discard":"Store"),
+											(clothing.getClothingType().isDiscardedOnUnequip(slotEquippedTo)
 													?"Take off "+(owner.isPlayer()?"your":owner.getName("")+"'s")+" " + clothing.getName() + " and throw it away."
 													:"Store "+(owner.isPlayer()?"your":owner.getName("")+"'s")+" " + clothing.getName() + " in this area."),
 											INVENTORY_MENU){
@@ -5520,7 +5521,7 @@ public class InventoryDialogue {
 								return new Response("Enchant", "You can't enchant equipped clothing!", null);
 							}
 							
-						} else if(index == 6 && !clothing.getClothingType().isDiscardedOnUnequip()) {
+						} else if(index == 6 && !clothing.getClothingType().isDiscardedOnUnequip(slotEquippedTo)) {
 							return new Response("Unequip", "Unequip the " + clothing.getName() + ".", INVENTORY_MENU){
 								@Override
 								public void effects(){
@@ -5633,12 +5634,12 @@ public class InventoryDialogue {
 								if(!clothing.getClothingType().isAbleToBeDropped()) {
 									return new Response("Drop", "You cannot drop the " + clothing.getName() + "!", null);
 									
-								} else if(areaFull && !clothing.getClothingType().isDiscardedOnUnequip()) {
+								} else if(areaFull && !clothing.getClothingType().isDiscardedOnUnequip(slotEquippedTo)) {
 									return new Response("Drop", "This area is full, so you can't drop "+(owner.isPlayer()?"your":owner.getName("")+"'s")+" " + clothing.getName() + " here!", null);
 								} else {
 									if (owner.isAbleToUnequip(clothing, false, Main.game.getPlayer())) {
-										return new Response((clothing.getClothingType().isDiscardedOnUnequip()?"Discard":"Drop"),
-												(clothing.getClothingType().isDiscardedOnUnequip()
+										return new Response((clothing.getClothingType().isDiscardedOnUnequip(slotEquippedTo)?"Discard":"Drop"),
+												(clothing.getClothingType().isDiscardedOnUnequip(slotEquippedTo)
 														?"Take off "+(owner.isPlayer()?"your":owner.getName("")+"'s")+" " + clothing.getName() + " and throw it away."
 														:"Drop "+(owner.isPlayer()?"your":owner.getName("")+"'s")+" " + clothing.getName() + "."),
 												Sex.SEX_DIALOGUE){
@@ -5662,12 +5663,12 @@ public class InventoryDialogue {
 								if(!clothing.getClothingType().isAbleToBeDropped()) {
 									return new Response("Store", "You cannot drop the " + clothing.getName() + "!", null);
 									
-								} else if(areaFull && !clothing.getClothingType().isDiscardedOnUnequip()) {
+								} else if(areaFull && !clothing.getClothingType().isDiscardedOnUnequip(slotEquippedTo)) {
 									return new Response("Store", "This area is full, so you can't store "+(owner.isPlayer()?"your":owner.getName("")+"'s")+" " + clothing.getName() + " here!", null);
 								} else {
 									if (owner.isAbleToUnequip(clothing, false, Main.game.getPlayer())) {
-										return new Response((clothing.getClothingType().isDiscardedOnUnequip()?"Discard":"Store"),
-												(clothing.getClothingType().isDiscardedOnUnequip()
+										return new Response((clothing.getClothingType().isDiscardedOnUnequip(slotEquippedTo)?"Discard":"Store"),
+												(clothing.getClothingType().isDiscardedOnUnequip(slotEquippedTo)
 														?"Take off "+(owner.isPlayer()?"your":owner.getName("")+"'s")+" " + clothing.getName() + " and throw it away."
 														:"Drop "+(owner.isPlayer()?"your":owner.getName("")+"'s")+" " + clothing.getName() + "."),
 												Sex.SEX_DIALOGUE){
@@ -5730,7 +5731,7 @@ public class InventoryDialogue {
 								return new Response("Enchant", "You can't enchant equipped clothing!", null);
 							}
 							
-						} else if(index == 6 && !clothing.getClothingType().isDiscardedOnUnequip()) {
+						} else if(index == 6 && !clothing.getClothingType().isDiscardedOnUnequip(slotEquippedTo)) {
 							if(!Sex.getSexManager().isAbleToRemoveSelfClothing(Main.game.getPlayer())) {
 								return new Response("Unequip", "You can't unequip the " + clothing.getName() + " in this sex scene!", null);
 							}
@@ -5803,6 +5804,7 @@ public class InventoryDialogue {
 			// ****************************** ITEM DOES NOT BELONG TO PLAYER ******************************
 				
 			} else {
+				InventorySlot slotEquippedTo = clothing.getSlotEquippedTo();
 				switch(interactionType) {
 					case COMBAT:
 						if (index == 1) {
@@ -5859,11 +5861,11 @@ public class InventoryDialogue {
 								if(!clothing.getClothingType().isAbleToBeDropped()) {
 									return new Response("Drop", "You cannot drop the " + clothing.getName() + "!", null);
 									
-								} else if(areaFull && !clothing.getClothingType().isDiscardedOnUnequip()) {
+								} else if(areaFull && !clothing.getClothingType().isDiscardedOnUnequip(slotEquippedTo)) {
 									return new Response("Drop", UtilText.parse(inventoryNPC, "This area is full, so you can't drop [npc.namePos] " + clothing.getName() + " here!"), null);
 								} else {
-									return new Response((clothing.getClothingType().isDiscardedOnUnequip()?"Discard":"Drop"),
-											(clothing.getClothingType().isDiscardedOnUnequip()
+									return new Response((clothing.getClothingType().isDiscardedOnUnequip(slotEquippedTo)?"Discard":"Drop"),
+											(clothing.getClothingType().isDiscardedOnUnequip(slotEquippedTo)
 													?UtilText.parse(inventoryNPC, "Take off [npc.namePos] " + clothing.getName() + " and throw it away.")
 													:UtilText.parse(inventoryNPC, "Drop [npc.namePos] " + clothing.getName() + ".")),
 											INVENTORY_MENU){
@@ -5878,11 +5880,11 @@ public class InventoryDialogue {
 								if(!clothing.getClothingType().isAbleToBeDropped()) {
 									return new Response("Store", "You cannot drop the " + clothing.getName() + "!", null);
 									
-								} else if(areaFull && !clothing.getClothingType().isDiscardedOnUnequip()) {
+								} else if(areaFull && !clothing.getClothingType().isDiscardedOnUnequip(slotEquippedTo)) {
 									return new Response("Store", UtilText.parse(inventoryNPC, "This area is full, so you can't store [npc.namePos] " + clothing.getName() + " here!"), null);
 								} else {
-									return new Response((clothing.getClothingType().isDiscardedOnUnequip()?"Discard":"Store"),
-											(clothing.getClothingType().isDiscardedOnUnequip()
+									return new Response((clothing.getClothingType().isDiscardedOnUnequip(slotEquippedTo)?"Discard":"Store"),
+											(clothing.getClothingType().isDiscardedOnUnequip(slotEquippedTo)
 													?UtilText.parse(inventoryNPC, "Take off [npc.namePos] " + clothing.getName() + " and throw it away.")
 													:UtilText.parse(inventoryNPC, "Store [npc.namePos] " + clothing.getName() + " in this area.")),
 											INVENTORY_MENU){
@@ -5898,7 +5900,7 @@ public class InventoryDialogue {
 							if(inventoryFull) {
 								return new Response("Take", "Your inventory is full, so you can't take this!", null);
 								
-							} else if(clothing.getClothingType().isDiscardedOnUnequip()) {
+							} else if(clothing.getClothingType().isDiscardedOnUnequip(slotEquippedTo)) {
 								return new Response("Take", "This piece of clothing is automatically discarded when unequipped, so you can't take it!", null);
 								
 							} else {
@@ -5967,7 +5969,7 @@ public class InventoryDialogue {
 								return new Response("Enchant", "You can't enchant equipped clothing!", null);
 							}
 							
-						} else if(index == 6 && !clothing.getClothingType().isDiscardedOnUnequip()) {
+						} else if(index == 6 && !clothing.getClothingType().isDiscardedOnUnequip(slotEquippedTo)) {
 							return new Response("Unequip", "Unequip the " + clothing.getName() + ".", INVENTORY_MENU){
 								@Override
 								public void effects(){
@@ -6027,13 +6029,13 @@ public class InventoryDialogue {
 								} else if(!Sex.getSexManager().isAbleToRemoveOthersClothing(Main.game.getPlayer(), clothing)) {
 									return new Response("Drop", UtilText.parse(inventoryNPC, "You can't unequip the " + clothing.getName() + " in this sex scene!"), null);
 									
-								} else if(areaFull && !clothing.getClothingType().isDiscardedOnUnequip()) {
+								} else if(areaFull && !clothing.getClothingType().isDiscardedOnUnequip(slotEquippedTo)) {
 									return new Response("Drop", UtilText.parse(inventoryNPC, "This area is full, so you can't drop [npc.namePos] " + clothing.getName() + " here!"), null);
 									
 								} else {
 									if (owner.isAbleToUnequip(clothing, false, Main.game.getPlayer())) {
-										return new Response((clothing.getClothingType().isDiscardedOnUnequip()?"Discard":"Drop"),
-											(clothing.getClothingType().isDiscardedOnUnequip()
+										return new Response((clothing.getClothingType().isDiscardedOnUnequip(slotEquippedTo)?"Discard":"Drop"),
+											(clothing.getClothingType().isDiscardedOnUnequip(slotEquippedTo)
 													?UtilText.parse(inventoryNPC, "Take off [npc.namePos] " + clothing.getName() + " and throw it away.")
 													:UtilText.parse(inventoryNPC, "Drop [npc.namePos] " + clothing.getName() + ".")),
 												Sex.SEX_DIALOGUE){
@@ -6059,12 +6061,12 @@ public class InventoryDialogue {
 								} else if(!Sex.getSexManager().isAbleToRemoveOthersClothing(Main.game.getPlayer(), clothing)) {
 									return new Response("Store", UtilText.parse(inventoryNPC, "You can't unequip the " + clothing.getName() + " in this sex scene!"), null);
 									
-								} else if(areaFull && !clothing.getClothingType().isDiscardedOnUnequip()) {
+								} else if(areaFull && !clothing.getClothingType().isDiscardedOnUnequip(slotEquippedTo)) {
 									return new Response("Store", UtilText.parse(inventoryNPC, "This area is full, so you can't store [npc.namePos] " + clothing.getName() + " here!"), null);
 								} else {
 									if (owner.isAbleToUnequip(clothing, false, Main.game.getPlayer())) {
-										return new Response((clothing.getClothingType().isDiscardedOnUnequip()?"Discard":"Store"),
-												(clothing.getClothingType().isDiscardedOnUnequip()
+										return new Response((clothing.getClothingType().isDiscardedOnUnequip(slotEquippedTo)?"Discard":"Store"),
+												(clothing.getClothingType().isDiscardedOnUnequip(slotEquippedTo)
 														?UtilText.parse(inventoryNPC, "Take off [npc.namePos] " + clothing.getName() + " and throw it away.")
 														:UtilText.parse(inventoryNPC, "Store [npc.namePos] " + clothing.getName() + " in this area.")),
 												Sex.SEX_DIALOGUE){
@@ -6125,7 +6127,7 @@ public class InventoryDialogue {
 								return new Response("Enchant", "You can't enchant equipped clothing!", null);
 							}
 							
-						} else if(index == 6 && !clothing.getClothingType().isDiscardedOnUnequip()) {
+						} else if(index == 6 && !clothing.getClothingType().isDiscardedOnUnequip(slotEquippedTo)) {
 							if(!Sex.getSexManager().isAbleToRemoveOthersClothing(Main.game.getPlayer(), clothing)) {
 								return new Response("Unequip", "You can't unequip the " + clothing.getName() + " in this sex scene!", null);
 							}
@@ -8453,7 +8455,7 @@ public class InventoryDialogue {
 	
 	private static String unequipClothingToFloor(GameCharacter unequipper, AbstractClothing clothing) {
 		String unequipDescription = "";
-		if(clothing.getClothingType().isDiscardedOnUnequip()) {
+		if(clothing.getClothingType().isDiscardedOnUnequip(clothing.getSlotEquippedTo())) {
 			unequipDescription = owner.unequipClothingIntoVoid(clothing, true, unequipper);
 		} else {
 			unequipDescription = owner.unequipClothingOntoFloor(clothing, true, unequipper);
@@ -8466,7 +8468,7 @@ public class InventoryDialogue {
 	
 	private static String unequipClothingToUnequippersInventory(GameCharacter unequipper, AbstractClothing clothing) {
 		String unequipDescription = "";
-		if(clothing.getClothingType().isDiscardedOnUnequip()) {
+		if(clothing.getClothingType().isDiscardedOnUnequip(clothing.getSlotEquippedTo())) {
 			unequipDescription = owner.unequipClothingIntoVoid(clothing, true, unequipper);
 		} else {
 			unequipDescription = owner.unequipClothingIntoUnequippersInventory(clothing, true, unequipper);
@@ -8478,7 +8480,7 @@ public class InventoryDialogue {
 	
 	private static String unequipClothingToInventory(GameCharacter unequipper, AbstractClothing clothing) {
 		String unequipDescription = "";
-		if(clothing.getClothingType().isDiscardedOnUnequip()) {
+		if(clothing.getClothingType().isDiscardedOnUnequip(clothing.getSlotEquippedTo())) {
 			unequipDescription = owner.unequipClothingIntoVoid(clothing, true, unequipper);
 		} else {
 			unequipDescription = owner.unequipClothingIntoInventory(clothing, true, unequipper);
