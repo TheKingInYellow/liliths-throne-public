@@ -822,7 +822,7 @@ public class PixShower {
 			SexActionType.ORGASM,
 			ArousalIncrease.ZERO_NONE,
 			ArousalIncrease.ZERO_NONE,
-			CorruptionLevel.ZERO_PURE,
+			CorruptionLevel.ONE_VANILLA,
 			null,
 			SexParticipantType.NORMAL) {
 		@Override
@@ -1017,7 +1017,7 @@ public class PixShower {
 			SexActionType.ORGASM,
 			ArousalIncrease.ZERO_NONE,
 			ArousalIncrease.ZERO_NONE,
-			CorruptionLevel.ZERO_PURE,
+			CorruptionLevel.ONE_VANILLA,
 			null,
 			SexParticipantType.NORMAL) {
 		@Override

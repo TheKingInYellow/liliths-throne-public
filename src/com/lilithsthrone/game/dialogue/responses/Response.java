@@ -246,8 +246,8 @@ public class Response {
 	 * @return true if this action has no requirements, or if all requirements are met.
 	 */
 	public boolean isAvailable(){
-		return !hasRequirements()
-				|| ((isCorruptionWithinRange() || isAvailableFromFetishes() || (corruptionBypass==null && fetishesRequired==null))
+		if(hasRequirements()) {
+			return (isBaseCorruptionWithinRange() || isAvailableFromFetishes() || (corruptionBypass==null && fetishesRequired==null))
 					&& !isBlockedFromPerks()
 					&& isFemininityInRange()
 					&& isRequiredRace()
@@ -258,13 +258,31 @@ public class Response {
 	 * @return true if this action is not available from the requirements, and is instead available due to being able to bypass the corruption requirements.
 	 */
 	public boolean isAbleToBypass(){
-		if(!isAvailable()
-				&& (!Main.game.isInSex() || Main.getProperties().hasValue(PropertyValue.bypassSexActions))
-				&& (!isBlockedFromPerks()
-						&& isFemininityInRange()
-						&& isRequiredRace()
-						&& (isAvailableFromAdditionalOngoingAvailableMap() || (isPenetrationTypeAvailable() && isOrificeTypeAvailable())))) {
-			return !isCorruptionWithinRange() && !isAvailableFromFetishes();
+		if(!isAvailable()) {
+			if (Main.game.isSpittingDisabled() && fetishesRequired != null && fetishesRequired.contains(Fetish.FETISH_TRANSFORMATION_RECEIVING))
+				return true;
+
+			if (!Main.getProperties().hasValue(PropertyValue.bypassSexActions)) {
+				if (!isCorruptionWithinRange()
+						&& sexActionType != SexActionType.ORGASM
+						&& sexActionType != SexActionType.ORGASM_NO_AROUSAL_RESET) {
+					return false;
+				}
+			}
+
+			if (isBlockedFromPerks())
+				return false;
+
+			if (!isFemininityInRange())
+				return false;
+
+			if (!isRequiredRace())
+				return false;
+
+			if (isAvailableFromAdditionalOngoingAvailableMap() || (isPenetrationTypeAvailable() && isOrificeTypeAvailable()))
+				return true;
+
+			return false;
 		}
 		
 		return false;
@@ -283,7 +301,7 @@ public class Response {
 			}
 			
 			if(corruptionBypass != null) {
-				if(isCorruptionWithinRange())
+				if(isBaseCorruptionWithinRange())
 					SB.append("Your <span style='color:"+Main.game.getPlayer().getCorruptionLevel().getColour().toWebHexString()+";'>"+Util.capitaliseSentence(Main.game.getPlayer().getCorruptionLevel().getName())+"</span>"
 							+ " [style.colourCorruption(corruption)] has unlocked this action!");
 				else
@@ -541,6 +559,10 @@ public class Response {
 
 	public boolean isCorruptionWithinRange() {
 		return corruptionBypass != null && corruptionBypass.getMinimumValue() <= Main.game.getPlayer().getAttributeValue(Attribute.MAJOR_CORRUPTION);
+	}
+
+	public boolean isBaseCorruptionWithinRange() {
+		return corruptionBypass != null && corruptionBypass.getMinimumValue() <= Main.game.getPlayer().getBaseAttributeValue(Attribute.MAJOR_CORRUPTION);
 	}
 	
 	public boolean isAvailableFromFetishes() {
