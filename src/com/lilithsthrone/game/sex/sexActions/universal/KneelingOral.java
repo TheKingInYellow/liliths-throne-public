@@ -25,7 +25,7 @@ public class KneelingOral {
 			SexActionType.ORGASM,
 			ArousalIncrease.FIVE_EXTREME,
 			ArousalIncrease.TWO_LOW,
-			CorruptionLevel.ZERO_PURE,
+			CorruptionLevel.ONE_VANILLA,
 			Util.newHashMapOfValues(new Value<>(SexAreaOrifice.VAGINA, SexAreaPenetration.TONGUE)),
 			SexParticipantType.NORMAL) {
 
