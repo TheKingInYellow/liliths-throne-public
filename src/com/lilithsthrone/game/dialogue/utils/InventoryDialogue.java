@@ -24,6 +24,7 @@ import com.lilithsthrone.game.dialogue.npcDialogue.SlaveDialogue;
 import com.lilithsthrone.game.dialogue.responses.Response;
 import com.lilithsthrone.game.dialogue.responses.ResponseEffectsOnly;
 import com.lilithsthrone.game.dialogue.story.CharacterCreation;
+import com.lilithsthrone.game.inventory.CharacterInventory;
 import com.lilithsthrone.game.inventory.InventorySlot;
 import com.lilithsthrone.game.inventory.Rarity;
 import com.lilithsthrone.game.inventory.ShopTransaction;
@@ -8178,8 +8179,35 @@ public class InventoryDialogue {
 	}
 	
 	private static Response getQuickTradeResponse() {
-		
-		return null;
+
+		return new Response("Sell all", "Sell all items this vendor will buy", INVENTORY_MENU) {
+			@Override
+			public void effects() {
+				List<AbstractClothing> playerClothing = new ArrayList<>(Main.game.getPlayer().getAllClothingInInventory().keySet());
+				for(AbstractClothing c : playerClothing) {
+					if (inventoryNPC.willBuy(c)) {
+						int sellPrice = c.getPrice(inventoryNPC.getBuyModifier());
+						sellClothing(Main.game.getPlayer(), inventoryNPC, c, 1, sellPrice);
+					}
+				}
+				List<AbstractWeapon> playerWeapons = new ArrayList<>(Main.game.getPlayer().getAllWeaponsInInventory().keySet());
+				for (AbstractWeapon w : playerWeapons) {
+					if (inventoryNPC.willBuy(w)) {
+						int sellPrice = w.getPrice(inventoryNPC.getBuyModifier());
+						sellWeapons(Main.game.getPlayer(), inventoryNPC, w, 1, sellPrice);
+					}
+				}
+
+				List<AbstractItem> playerItems = new ArrayList<>(Main.game.getPlayer().getAllItemsInInventory().keySet());
+				for (AbstractItem i : playerItems) {
+					if (inventoryNPC.willBuy(i)) {
+						int sellPrice = i.getPrice(inventoryNPC.getBuyModifier());
+						sellItems(Main.game.getPlayer(), inventoryNPC, i, 1, sellPrice);
+					}
+				}
+			}
+		};
+
 		
 //		if (Main.game.getDialogueFlags().quickTrade) {
 //			return new Response("Quick-Manage: <b style='color:" + Colour.GENERIC_GOOD.toWebHexString() + ";'>ON</b>",
