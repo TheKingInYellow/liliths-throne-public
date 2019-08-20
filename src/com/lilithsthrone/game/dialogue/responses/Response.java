@@ -283,7 +283,7 @@ public class Response {
 			}
 			
 			if(corruptionBypass != null) {
-				if(isCorruptionWithinRange())
+				if(isBaseCorruptionWithinRange())
 					SB.append("Your <span style='color:"+Main.game.getPlayer().getCorruptionLevel().getColour().toWebHexString()+";'>"+Util.capitaliseSentence(Main.game.getPlayer().getCorruptionLevel().getName())+"</span>"
 							+ " [style.colourCorruption(corruption)] has unlocked this action!");
 				else
@@ -541,6 +541,10 @@ public class Response {
 
 	public boolean isCorruptionWithinRange() {
 		return corruptionBypass != null && corruptionBypass.getMinimumValue() <= Main.game.getPlayer().getAttributeValue(Attribute.MAJOR_CORRUPTION);
+	}
+
+	public boolean isBaseCorruptionWithinRange() {
+		return corruptionBypass != null && corruptionBypass.getMinimumValue() <= Main.game.getPlayer().getBaseAttributeValue(Attribute.MAJOR_CORRUPTION);
 	}
 	
 	public boolean isAvailableFromFetishes() {

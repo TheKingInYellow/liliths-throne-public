@@ -1541,7 +1541,7 @@ public class RalphOral {
 			SexActionType.ORGASM,
 			ArousalIncrease.FIVE_EXTREME,
 			ArousalIncrease.FIVE_EXTREME,
-			CorruptionLevel.ZERO_PURE,
+			CorruptionLevel.ONE_VANILLA,
 			null,
 			SexParticipantType.NORMAL) {
 		@Override
@@ -1784,7 +1784,7 @@ public class RalphOral {
 			SexActionType.ORGASM,
 			ArousalIncrease.FIVE_EXTREME,
 			ArousalIncrease.FIVE_EXTREME,
-			CorruptionLevel.ZERO_PURE,
+			CorruptionLevel.ONE_VANILLA,
 			null,
 			SexParticipantType.NORMAL) {
 		@Override
