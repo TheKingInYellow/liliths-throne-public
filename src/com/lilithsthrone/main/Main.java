@@ -438,7 +438,6 @@ public class Main extends Application {
 		credits.add(new CreditsSlot("Abaddon_TMZ", "", 0, 0, 0, 0, Subspecies.DEMON));
 
 		
-		
 		credits.add(new CreditsSlot("Adhana Konker", "", 0, 0, 3, 0));
 		credits.add(new CreditsSlot("Akira", "", 0, 0, 0, 2));
 		credits.add(new CreditsSlot("Aleskah", "", 0, 0, 0, 1));

@@ -378,7 +378,7 @@ public class SexActionPresets {
 //		positioningActions.add(GenericPositioning.class);
 		positioningActionsNew.add(PositioningMenu.class);
 		positioningActionsNew.add(GenericPositioning.class);
-		
+
 		miscActions.add(GenericActions.class);
 		miscActions.add(GenericOrgasms.class);
 		miscActions.add(PlayerTalk.class);

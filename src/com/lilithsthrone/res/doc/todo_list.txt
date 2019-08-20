@@ -173,7 +173,18 @@
 		Fixed issue where the 'degrading talk' sex action was never available.
 		The new taur spawn preference setting is now correctly saved in your properties file, so you don't have to set it every time the game is restarted.
 		When being transformed into a demon, your anus, nipples, vagina, and penis now correctly transform to have the same colour as your new demonic skin.
+
+	make suckle an ongoing action
 	
+	add time passed for birthing dialogue nodes
+	
+	does orgasm text say pussy is empty even if something is plugging it?
+	
+	arcane impotence has 'maximum arcane limited to 5' but it isn't
+	
+	PRs
+	
+	make vicky anal just a desire, not a certainty
 	
 
 	
@@ -183,6 +194,8 @@
 	need taur spawn % preferences
 	
 	fix item usage in combat
+	
+	no grope own breasts action?
 	
 	
 
@@ -227,7 +240,7 @@
 	
 	Need AI to want to swap to other character hole if already cummed in other one
 		Make them recalculate wants after orgasming
-	
+
 	change personality system
 
 	make it so you can ask Lilaiya to revert back to her original skin colour even after she becomes a full demon

@@ -11,7 +11,7 @@ import com.lilithsthrone.game.sex.Sex;
  * @author Innoxia
  */
 public class SexSlotAgainstWall {
-	
+
 	public static final SexSlot FACE_TO_WALL = new SexSlot(
 			"Face-to-wall",
 			"facing wall",

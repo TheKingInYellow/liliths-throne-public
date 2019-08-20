@@ -2647,6 +2647,10 @@ public class GenericOrgasms {
 			}
 			
 			SexAreaInterface areaContacted = Sex.getAllContactingSexAreas(Sex.getCharacterPerformingAction(), SexAreaPenetration.PENIS).get(0);
+			
+			if(areaContacted.isPenetration()) {
+				return false;
+			}
 
 			GameCharacter secondaryTarget = getSecondaryCreampieTarget(Sex.getCharacterTargetedForSexAction(this), (SexAreaOrifice) areaContacted);
 			
