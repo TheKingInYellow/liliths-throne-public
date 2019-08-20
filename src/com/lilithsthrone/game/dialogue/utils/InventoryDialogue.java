@@ -8184,7 +8184,7 @@ public class InventoryDialogue {
 			return null;
 
 		return getSellAllResponse();
-		
+
 //		if (Main.game.getDialogueFlags().quickTrade) {
 //			return new Response("Quick-Manage: <b style='color:" + Colour.GENERIC_GOOD.toWebHexString() + ";'>ON</b>",
 //					"Quick-Manage is turned <b style='color:" + Colour.GENERIC_GOOD.toWebHexString() + ";'>ON</b>!<br/>"
