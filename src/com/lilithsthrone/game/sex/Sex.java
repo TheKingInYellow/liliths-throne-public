@@ -1671,7 +1671,7 @@ public class Sex {
 				}
 			}
 		}
-		
+
 		positionActionsPlayer.sort((a1, a2) -> 
 		a1.getActionType()==SexActionType.POSITIONING_MENU
 			?a2.getActionType()==SexActionType.POSITIONING_MENU
@@ -1682,7 +1682,7 @@ public class Sex {
 				:a1.getActionType()!=SexActionType.POSITIONING_MENU && a2.isPositionSwap()
 					?1
 					:a1.getActionTitle().compareTo(a2.getActionTitle()));
-		
+
 		if(Sex.getTotalParticipantCount(false)>2) {
 			for(GameCharacter character : Sex.getAllParticipants(false)) {
 				if(!character.isPlayer() && !Sex.getTargetedPartner(Main.game.getPlayer()).equals(character)) {

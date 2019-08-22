@@ -435,7 +435,7 @@ public class ResponseSex extends Response {
 		domSlots.add(SexSlotStanding.STANDING_DOMINANT_FOUR);
 		domSlots.add(SexSlotGeneric.MISC_WATCHING);
 		domSlots.add(SexSlotGeneric.MISC_WATCHING);
-		
+
 		for(int i=0; i<submissives.size(); i++) {
 			subMap.put(submissives.get(i), subSlots.get(i));
 		}
@@ -503,13 +503,13 @@ public class ResponseSex extends Response {
 		subSlots.add(SexSlotLyingDown.LYING_DOWN_FOUR);
 		subSlots.add(SexSlotGeneric.MISC_WATCHING);
 		subSlots.add(SexSlotGeneric.MISC_WATCHING);
-		
+
 		if(submissives.size()==1) {
 			domSlots.add(SexSlotLyingDown.MISSIONARY);
 			domSlots.add(SexSlotLyingDown.FACE_SITTING);
 			domSlots.add(SexSlotLyingDown.BESIDE);
 			domSlots.add(SexSlotLyingDown.BESIDE_TWO);
-			
+
 		} else if(submissives.size()==2) {
 			domSlots.add(SexSlotLyingDown.MISSIONARY);
 			domSlots.add(SexSlotLyingDown.FACE_SITTING);
@@ -597,13 +597,13 @@ public class ResponseSex extends Response {
 		subSlots.add(SexSlotAllFours.ALL_FOURS_FOUR);
 		subSlots.add(SexSlotGeneric.MISC_WATCHING);
 		subSlots.add(SexSlotGeneric.MISC_WATCHING);
-		
+
 		if(submissives.size()==1) {
 			domSlots.add(SexSlotAllFours.BEHIND);
 			domSlots.add(SexSlotAllFours.IN_FRONT);
 			domSlots.add(SexSlotAllFours.IN_FRONT_TWO);
 			domSlots.add(SexSlotAllFours.HUMPING);
-			
+
 		} else if(submissives.size()==2) {
 			domSlots.add(SexSlotAllFours.BEHIND);
 			domSlots.add(SexSlotAllFours.IN_FRONT);

@@ -264,7 +264,7 @@ public class EnforcerHQDialogue {
 								}
 							};
 						}
-						
+
 					} else if (index == 2) {
 						if(!Main.game.getDialogueFlags().values.contains(DialogueFlagValue.feminisedBrax)) {
 							return new ResponseSex("Get punished by [brax.name]", "Get [brax.name] to take out [brax.his] frustration on you.", Util.newArrayListOfValues(Fetish.FETISH_SUBMISSIVE),

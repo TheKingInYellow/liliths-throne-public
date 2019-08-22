@@ -23,6 +23,13 @@ public class SMMasturbation extends SexManagerDefault {
 				dominants,
 				new HashMap<>());
 	}
+
+	
+	@Override
+	public List<AbstractSexPosition> getAllowedSexPositions() {
+		return Util.newArrayListOfValues(
+				SexPositionOther.MASTURBATION);
+	}
 	
 	@Override
 	public List<AbstractSexPosition> getAllowedSexPositions() {

@@ -2053,7 +2053,6 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 
 	public List<BlockedParts> getBlockedPartsMap(GameCharacter character, InventorySlot slotEquippedTo) {
 		List<ItemTag> tags = this.getItemTags(slotEquippedTo);
-
 		if(character!=null) {
 			boolean replaceCrotchBoobAccess = false;
 			boolean replaceGroinAccess = false;
@@ -2811,6 +2810,9 @@ public abstract class AbstractClothingType extends AbstractCoreType {
 	}
 
 	public List<ItemTag> getItemTags(InventorySlot slotEquippedTo) {
+		if(!itemTags.containsKey(slotEquippedTo)) {
+			return new ArrayList<>();
+		}
 		return itemTags.get(slotEquippedTo);
 	}
 
