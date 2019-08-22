@@ -258,37 +258,7 @@ public class InventoryDialogue {
 						}
 
 					} else if (index == 5) {
-						if(Main.game.getPlayer().getAllClothingInInventory().isEmpty()) {
-							return new Response("Equip all", "You don't have any clothing, so there's nothing to equip!", null);
-
-						} else {
-							return new Response("Equip all", "Equip as much of the clothing in your inventory as possible.", Combat.ENEMY_ATTACK){
-								@Override
-								public void effects(){
-									responseSB.setLength(0);
-
-									List<AbstractClothing> zlayerClothing = new ArrayList<>(Main.game.getPlayer().getAllClothingInInventory().keySet());
-									zlayerClothing.sort(new ClothingZLayerComparator().reversed());
-									Set<InventorySlot> slotsTaken = new HashSet<>();
-
-									for(AbstractClothing c : Main.game.getPlayer().getClothingCurrentlyEquipped()) {
-										slotsTaken.add(c.getSlotEquippedTo());
-									}
-
-									for(AbstractClothing c : zlayerClothing) {
-										if(!slotsTaken.contains(c.getClothingType().getEquipSlots().get(0))) {
-											responseSB.append("<p style='text-align:center;'>"+Main.game.getPlayer().equipClothingFromInventory(c, true, Main.game.getPlayer(), Main.game.getPlayer())+"</p>");
-											slotsTaken.add(c.getClothingType().getEquipSlots().get(0));
-										}
-									}
-
-									Combat.setCharacterTurnContent(Main.game.getPlayer(), Util.newArrayListOfValues("<b>Equip all clothing</b>: "+responseSB.toString()));
-									Combat.endCombatTurn();
-									Main.mainController.openInventory();
-								}
-							};
-						}
-
+						return getEquipAllResponse(Combat.ENEMY_ATTACK);
 					} else {
 						return null;
 					}
@@ -419,31 +389,7 @@ public class InventoryDialogue {
 						}
 
 					} else if (index == 5) {
-						if(Main.game.getPlayer().getAllClothingInInventory().isEmpty()) {
-							return new Response("Equip all", "You don't have any clothing, so there's nothing to equip!", null);
-
-						} else {
-							return new Response("Equip all", "Equip as much of the clothing in your inventory as possible.", INVENTORY_MENU){
-								@Override
-								public void effects(){
-									List<AbstractClothing> zlayerClothing = new ArrayList<>(Main.game.getPlayer().getAllClothingInInventory().keySet());
-									zlayerClothing.sort(new ClothingZLayerComparator().reversed());
-									Set<InventorySlot> slotsTaken = new HashSet<>();
-
-									for(AbstractClothing c : Main.game.getPlayer().getClothingCurrentlyEquipped()) {
-										slotsTaken.add(c.getSlotEquippedTo());
-									}
-
-									for(AbstractClothing c : zlayerClothing) {
-										if(!slotsTaken.contains(c.getClothingType().getEquipSlots().get(0))) {
-											Main.game.getTextEndStringBuilder().append("<p style='text-align:center;'>"+Main.game.getPlayer().equipClothingFromInventory(c, true, Main.game.getPlayer(), Main.game.getPlayer())+"</p>");
-											slotsTaken.add(c.getClothingType().getEquipSlots().get(0));
-										}
-									}
-								}
-							};
-						}
-
+						return getEquipAllResponse(INVENTORY_MENU);
 					} else if (index == 6 && inventoryNPC != null) {
 						if(inventoryNPC.getClothingCurrentlyEquipped().isEmpty()) {
 							return new Response("Displace all (them)", UtilText.parse(inventoryNPC, "[npc.Name] isn't wearing any clothing, so there's nothing to displace!"), null);
@@ -644,31 +590,7 @@ public class InventoryDialogue {
 						}
 
 					} else if (index == 5) {
-						if(Main.game.getPlayer().getAllClothingInInventory().isEmpty()) {
-							return new Response("Equip all", "You don't have any clothing, so there's nothing to equip!", null);
-
-						} else {
-							return new Response("Equip all", "Equip as much of the clothing in your inventory as possible.", INVENTORY_MENU){
-								@Override
-								public void effects(){
-									List<AbstractClothing> zlayerClothing = new ArrayList<>(Main.game.getPlayer().getAllClothingInInventory().keySet());
-									zlayerClothing.sort(new ClothingZLayerComparator().reversed());
-									Set<InventorySlot> slotsTaken = new HashSet<>();
-
-									for(AbstractClothing c : Main.game.getPlayer().getClothingCurrentlyEquipped()) {
-										slotsTaken.add(c.getSlotEquippedTo());
-									}
-
-									for(AbstractClothing c : zlayerClothing) {
-										if(!slotsTaken.contains(c.getClothingType().getEquipSlots().get(0))) {
-											Main.game.getTextEndStringBuilder().append("<p style='text-align:center;'>"+Main.game.getPlayer().equipClothingFromInventory(c, true, Main.game.getPlayer(), Main.game.getPlayer())+"</p>");
-											slotsTaken.add(c.getClothingType().getEquipSlots().get(0));
-										}
-									}
-								}
-							};
-						}
-
+						return getEquipAllResponse(INVENTORY_MENU);
 					} else if (index == 9 && inventoryNPC!=null) {
 						return getBuybackResponse();
 
@@ -8177,9 +8099,57 @@ public class InventoryDialogue {
 			};
 		}
 	}
-	
-	private static Response getQuickTradeResponse() {
 
+	private static Response getEquipAllResponse(DialogueNode dn) {
+		if(Main.game.getPlayer().getAllClothingInInventory().isEmpty()) {
+			return new Response("Equip all", "You don't have any clothing, so there's nothing to equip!", null);
+		}
+
+		return new Response("Equip all", "Equip as much of the clothing in your inventory as possible.", dn) {
+			@Override
+			public void effects() {
+				List<AbstractClothing> zlayerClothing = new ArrayList<>(Main.game.getPlayer().getClothingCurrentlyEquipped());
+				zlayerClothing.sort(new ClothingZLayerComparator());
+				StringBuilder responseSB = new StringBuilder();
+
+				for(AbstractClothing c : zlayerClothing) {
+					Main.game.getPlayer().unequipClothingIntoInventory(c, true, Main.game.getPlayer());
+				}
+
+				zlayerClothing = new ArrayList<>(Main.game.getPlayer().getAllClothingInInventory().keySet());
+				zlayerClothing.sort(new ClothingZLayerComparator());
+				Set<InventorySlot> slotsTaken = new HashSet<>();
+				for(AbstractClothing c : Main.game.getPlayer().getClothingCurrentlyEquipped()) {
+					slotsTaken.add(c.getSlotEquippedTo());
+				}
+
+				for(AbstractClothing c : zlayerClothing) {
+					if(!slotsTaken.contains(c.getClothingType().getEquipSlots().get(0))) {
+						if(c.getClothingType().getFemininityMaximum() < Main.game.getPlayer().getFemininityValue()) {
+							continue;
+						}
+
+						if(c.getClothingType().getFemininityMinimum() > Main.game.getPlayer().getFemininityValue()) {
+							continue;
+						}
+
+						slotsTaken.add(c.getClothingType().getEquipSlots().get(0));
+						responseSB.append("<p style='text-align:center;'>"+Main.game.getPlayer().equipClothingFromInventory(c, true, Main.game.getPlayer(), Main.game.getPlayer())+"</p>");
+					}
+				}
+
+				if (dn == Combat.ENEMY_ATTACK) {
+					Combat.setCharacterTurnContent(Main.game.getPlayer(), Util.newArrayListOfValues("<b>Equip all clothing</b>: "+responseSB.toString()));
+					Combat.endCombatTurn();
+					Main.mainController.openInventory();
+				} else {
+
+				}
+			}
+		};
+	}
+
+	private static Response getSellAllResponse() {
 		return new Response("Sell all", "Sell all items this vendor will buy", INVENTORY_MENU) {
 			@Override
 			public void effects() {
@@ -8207,7 +8177,13 @@ public class InventoryDialogue {
 				}
 			}
 		};
+	}
 
+	private static Response getQuickTradeResponse() {
+		if (inventoryNPC == null || !inventoryNPC.isTrader())
+			return null;
+
+		return getSellAllResponse();
 		
 //		if (Main.game.getDialogueFlags().quickTrade) {
 //			return new Response("Quick-Manage: <b style='color:" + Colour.GENERIC_GOOD.toWebHexString() + ";'>ON</b>",
