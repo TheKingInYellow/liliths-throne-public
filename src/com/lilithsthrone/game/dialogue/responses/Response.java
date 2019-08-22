@@ -247,7 +247,7 @@ public class Response {
 	 */
 	public boolean isAvailable(){
 		return !hasRequirements()
-				|| ((isCorruptionWithinRange() || isAvailableFromFetishes() || (corruptionBypass==null && fetishesRequired==null))
+				|| ((isBaseCorruptionWithinRange() || isAvailableFromFetishes() || (corruptionBypass==null && fetishesRequired==null))
 					&& !isBlockedFromPerks()
 					&& isFemininityInRange()
 					&& isRequiredRace()
@@ -259,12 +259,15 @@ public class Response {
 	 */
 	public boolean isAbleToBypass(){
 		if(!isAvailable()
-				&& (!Main.game.isInSex() || Main.getProperties().hasValue(PropertyValue.bypassSexActions))
+				&& (!Main.game.isInSex()
+					|| Main.getProperties().hasValue(PropertyValue.bypassSexActions)
+					|| getSexActionType() == SexActionType.ORGASM
+					|| getSexActionType() == SexActionType.ORGASM_NO_AROUSAL_RESET)
 				&& (!isBlockedFromPerks()
 						&& isFemininityInRange()
 						&& isRequiredRace()
 						&& (isAvailableFromAdditionalOngoingAvailableMap() || (isPenetrationTypeAvailable() && isOrificeTypeAvailable())))) {
-			return !isCorruptionWithinRange() && !isAvailableFromFetishes();
+			return !isBaseCorruptionWithinRange() && !isAvailableFromFetishes();
 		}
 		
 		return false;
