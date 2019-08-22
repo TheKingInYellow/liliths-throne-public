@@ -261,6 +261,7 @@ public class Response {
 		if(!isAvailable()
 				&& (!Main.game.isInSex()
 					|| Main.getProperties().hasValue(PropertyValue.bypassSexActions)
+					|| isCorruptionWithinRange()
 					|| getSexActionType() == SexActionType.ORGASM
 					|| getSexActionType() == SexActionType.ORGASM_NO_AROUSAL_RESET)
 				&& (!isBlockedFromPerks()
