@@ -9858,6 +9858,7 @@ public enum StatusEffect {
 						+ (Sex.isCharacterObeyingTarget(target, Main.game.getPlayer())
 							?"<br/>[style.italicsMinorGood([npc.She] will listen to your requests.)]"
 							:"<br/>[style.italicsMinorBad([npc.She] will ignore all of your requests.)]");
+				
 			} else {
 				return UtilText.parse(target,
 						(Main.game.isInNewWorld()
