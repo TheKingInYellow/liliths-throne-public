@@ -187,7 +187,7 @@ public class SexActionPresets {
 	public static HashMap<SexAreaInterface, List<SexAreaInterface>> mouthToAppendages = new HashMap<>();
 	public static HashMap<SexAreaInterface, List<SexAreaInterface>> mouthToTailAndTentacle = new HashMap<>();
 	
-	
+
 	public static HashMap<SexAreaInterface, List<SexAreaInterface>> tailToAllAreas;
 	public static HashMap<SexAreaInterface, List<SexAreaInterface>> tentacleToAllAreas;
 	
@@ -196,7 +196,7 @@ public class SexActionPresets {
 	
 	public static HashMap<SexAreaInterface, List<SexAreaInterface>> tailToUpperTorso;
 	public static HashMap<SexAreaInterface, List<SexAreaInterface>> tailToLowerHalf;
-	
+
 	public static HashMap<SexAreaInterface, List<SexAreaInterface>> tentacleToUpperTorso;
 	public static HashMap<SexAreaInterface, List<SexAreaInterface>> tentacleToLowerHalf;
 	
@@ -379,7 +379,7 @@ public class SexActionPresets {
 //		positioningActions.add(GenericPositioning.class);
 		positioningActionsNew.add(PositioningMenu.class);
 		positioningActionsNew.add(GenericPositioning.class);
-		
+
 		miscActions.add(GenericActions.class);
 		miscActions.add(GenericOrgasms.class);
 		miscActions.add(PlayerTalk.class);
