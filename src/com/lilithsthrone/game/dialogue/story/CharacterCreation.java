@@ -229,6 +229,7 @@ public class CharacterCreation {
 				break;
 		}
 		Main.game.getPlayer().setBody(Gender.F_V_B_FEMALE, RacialBody.HUMAN, RaceStage.HUMAN);
+		Main.game.getPlayer().setPiercedEar(true);
 		Main.game.getPlayer().setFemininity(fem.getMedianFemininity());
 		
 		getDressed();
@@ -252,6 +253,7 @@ public class CharacterCreation {
 				break;
 		}
 		Main.game.getPlayer().setBody(Gender.M_P_MALE, RacialBody.HUMAN, RaceStage.HUMAN);
+		Main.game.getPlayer().setPiercedEar(false);
 		Main.game.getPlayer().setFemininity(fem.getMedianFemininity());
 		
 		getDressed();
