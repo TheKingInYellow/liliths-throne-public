@@ -8133,6 +8133,10 @@ public class InventoryDialogue {
 							continue;
 						}
 
+						if (c.getRarity() == Rarity.JINXED) {
+							continue;
+						}
+
 						slotsTaken.add(c.getClothingType().getEquipSlots().get(0));
 						responseSB.append("<p style='text-align:center;'>"+Main.game.getPlayer().equipClothingFromInventory(c, true, Main.game.getPlayer(), Main.game.getPlayer())+"</p>");
 					}
