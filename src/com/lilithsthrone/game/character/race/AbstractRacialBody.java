@@ -373,9 +373,9 @@ public abstract class AbstractRacialBody {
 	
 	public SexualOrientation getSexualOrientation(Gender gender) {
 		if(gender.isFeminine()) {
-			return SexualOrientationPreference.getSexualOrientationFromUserPreferences(15, 50, 35);
+			return SexualOrientationPreference.getSexualOrientationFromUserPreferences(10, 50, 90);
 		} else {
-			return SexualOrientationPreference.getSexualOrientationFromUserPreferences(40, 50, 10);
+			return SexualOrientationPreference.getSexualOrientationFromUserPreferences(90, 50, 10);
 		}
 	}
 	
