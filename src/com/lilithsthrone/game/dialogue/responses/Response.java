@@ -268,7 +268,7 @@ public class Response {
 						&& isFemininityInRange()
 						&& isRequiredRace()
 						&& (isAvailableFromAdditionalOngoingAvailableMap() || (isPenetrationTypeAvailable() && isOrificeTypeAvailable())))) {
-			return !isBaseCorruptionWithinRange() && !isAvailableFromFetishes();
+			return isAvailableFromFetishes() || corruptionBypass != null;
 		}
 		
 		return false;
