@@ -35,7 +35,7 @@ import com.lilithsthrone.utils.Util;
  * @author Innoxia
  */
 public class GenericActions {
-	
+
 	
 	public static final SexAction GENERIC_RESIST = new SexAction(
 			SexActionType.ONGOING,
