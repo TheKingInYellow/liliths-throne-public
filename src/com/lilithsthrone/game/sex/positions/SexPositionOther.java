@@ -2891,7 +2891,7 @@ public class SexPositionOther {
 		public Map<SexAreaPenetration, Integer> getRestrictedPenetrationCounts(GameCharacter penetrator) {
 			List<SexSlot> slotsTop = Util.newArrayListOfValues(SexSlotLyingDown.MATING_PRESS, SexSlotLyingDown.MATING_PRESS_TWO, SexSlotLyingDown.MATING_PRESS_THREE, SexSlotLyingDown.MATING_PRESS_FOUR);
 			List<SexSlot> slotsBottom = Util.newArrayListOfValues(SexSlotLyingDown.LYING_DOWN, SexSlotLyingDown.LYING_DOWN_TWO, SexSlotLyingDown.LYING_DOWN_THREE, SexSlotLyingDown.LYING_DOWN_FOUR);
-
+			
 			for(int i=0;i<4;i++) {
 				GameCharacter top = Sex.getCharacterInPosition(slotsTop.get(i));
 				GameCharacter bottom = Sex.getCharacterInPosition(slotsBottom.get(i));

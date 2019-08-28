@@ -35,7 +35,7 @@ import com.lilithsthrone.utils.Util;
  * @author Innoxia
  */
 public class GenericActions {
-
+	
 	
 	public static final SexAction GENERIC_RESIST = new SexAction(
 			SexActionType.ONGOING,
@@ -1109,6 +1109,11 @@ public class GenericActions {
 		public void applyEffects() {
 			GameCharacter target = Sex.getCharacterTargetedForSexAction(this);
 			Sex.removeCharacterForbiddenByOthersFromPositioning(Sex.getCharacterTargetedForSexAction(this));
+			for(GameCharacter participant : Sex.getAllParticipants()) {
+				if(!participant.equals(target) && Sex.getSexPositionSlot(participant)!=SexSlotGeneric.MISC_WATCHING) {
+					((NPC)target).generateSexChoices(false, participant, null);
+				}
+			}
 		}
 	};
 	
