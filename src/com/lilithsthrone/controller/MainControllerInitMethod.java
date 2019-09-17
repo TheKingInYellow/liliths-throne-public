@@ -2356,9 +2356,6 @@ public class MainControllerInitMethod {
 				if (((EventTarget) MainController.document.getElementById(id)) != null) {
 					((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e -> {
 						BodyChanging.getTarget().setAgeAppearanceDifferenceToAppearAsAge(Math.max(18, Math.min(BodyChanging.getTarget().getAppearsAsAgeValue()+1, BodyChanging.getTarget().getAgeValue()+10)));
-						System.out.println(
-								BodyChanging.getTarget().getName()+" "+BodyChanging.getTarget().getAgeAppearanceDifference()+" "+BodyChanging.getTarget().getAppearsAsAgeValue()
-								+" ("+(BodyChanging.getTarget().getAgeValue() + BodyChanging.getTarget().getAgeAppearanceDifference())+")");
 						Main.game.setContent(new Response("", "", Main.game.getCurrentDialogueNode()));
 					}, false);
 				}
@@ -2851,7 +2848,7 @@ public class MainControllerInitMethod {
 					id = "CHANGE_LEG_CONFIGURATION_"+legConfig;
 					if (((EventTarget) MainController.document.getElementById(id)) != null) {
 						((EventTarget) MainController.document.getElementById(id)).addEventListener("click", e -> {
-							BodyChanging.getTarget().getLegType().applyLegConfigurationTransformation(BodyChanging.getTarget(), legConfig, true);
+							BodyChanging.getTarget().getLegType().applyLegConfigurationTransformation(BodyChanging.getTarget(), legConfig, true, false);
 							Main.game.setContent(new Response("", "", Main.game.getCurrentDialogueNode()));
 						}, false);
 					}
@@ -4724,7 +4721,7 @@ public class MainControllerInitMethod {
 			
 			for(AbstractPerk perk : Perk.getAllPerks()) {
 				GameCharacter character =
-						(Main.game.getCurrentDialogueNode() == PhoneDialogue.CHARACTER_LEVEL_UP || Main.game.getCurrentDialogueNode() == PhoneDialogue.CHARACTER_APPEARANCE)
+						(Main.game.getCurrentDialogueNode() == PhoneDialogue.CHARACTER_PERK_TREE || Main.game.getCurrentDialogueNode() == PhoneDialogue.CHARACTER_APPEARANCE)
 							?Main.game.getPlayer()
 							:(Main.game.getCurrentDialogueNode() == OccupantManagementDialogue.SLAVE_MANAGEMENT_PERKS
 								?OccupantManagementDialogue.characterSelected()
@@ -4776,7 +4773,7 @@ public class MainControllerInitMethod {
 			}
 
 
-			for(CombatMove move : CombatMove.allCombatMoves) {
+			for(CombatMove move : CombatMove.getAllCombatMoves()) {
 				GameCharacter character = CombatMovesSetup.getTarget();
 
 				id = "MOVE_"+move.getIdentifier();
@@ -4786,12 +4783,10 @@ public class MainControllerInitMethod {
 					MainController.addEventListener(MainController.document, id, "mouseenter", new TooltipInformationEventListener().setCombatMove(move, character), false);
 
 					((EventTarget) MainController.document.getElementById(id)).addEventListener("click", event -> {
-						if(character.getEquippedMoves().contains(move))
-						{
+						if(character.getEquippedMoves().contains(move)) {
 							character.unequipMove(move.getIdentifier());
-						}
-						else if(character.getEquippedMoves().size() < GameCharacter.MAX_COMBAT_MOVES)
-						{
+							
+						} else if(character.getEquippedMoves().size() < GameCharacter.MAX_COMBAT_MOVES) {
 							character.equipMove(move.getIdentifier());
 						}
 						Main.game.setContent(new Response("", "", Main.game.getCurrentDialogueNode()));
@@ -4800,14 +4795,14 @@ public class MainControllerInitMethod {
 			}
 			
 			// Level up dialogue:
-			if (Main.game.getCurrentDialogueNode() == PhoneDialogue.CHARACTER_LEVEL_UP
+			if (Main.game.getCurrentDialogueNode() == PhoneDialogue.CHARACTER_PERK_TREE
 					|| Main.game.getCurrentDialogueNode() == OccupantManagementDialogue.SLAVE_MANAGEMENT_PERKS
 					|| Main.game.getCurrentDialogueNode() == CharactersPresentDialogue.PERKS
 					|| Main.game.getCurrentDialogueNode() == PhoneDialogue.CHARACTER_APPEARANCE
 					|| Main.game.getCurrentDialogueNode() == CharactersPresentDialogue.MENU
 					|| Main.game.getCurrentDialogueNode() == PhoneDialogue.CONTACTS_CHARACTER) {
 				
-				GameCharacter character = Main.game.getCurrentDialogueNode() == PhoneDialogue.CHARACTER_LEVEL_UP
+				GameCharacter character = Main.game.getCurrentDialogueNode() == PhoneDialogue.CHARACTER_PERK_TREE
 						?Main.game.getPlayer()
 						:(Main.game.getCurrentDialogueNode() == OccupantManagementDialogue.SLAVE_MANAGEMENT_PERKS
 							?OccupantManagementDialogue.characterSelected()

@@ -291,7 +291,12 @@ public class TestNPC extends NPC {
 						false, false,
 						new SMAllFours(
 								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.BEHIND)),
-								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(TestNPC.class), SexSlotAllFours.ALL_FOURS))),
+								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(TestNPC.class), SexSlotAllFours.ALL_FOURS))) {
+							@Override
+							public boolean isPublicSex() {
+								return false;
+							}
+						},
 						null,
 						null, TEST_DIALOGUE_AFTER_RAPE, "<p>"
 							+ "You quietly close the door and lock it behind you. After all, you wouldn't want anyone interrupting your fun."
@@ -315,6 +320,10 @@ public class TestNPC extends NPC {
 						new SMAllFours(
 								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.BEHIND)),
 								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(TestNPC.class), SexSlotAllFours.ALL_FOURS))) {
+							@Override
+							public boolean isPublicSex() {
+								return false;
+							}
 							@Override
 							public SexPace getStartingSexPaceModifier(GameCharacter character) {
 								if(character.isPlayer()) {
@@ -346,6 +355,10 @@ public class TestNPC extends NPC {
 						new SMAllFours(
 								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotAllFours.BEHIND)),
 								Util.newHashMapOfValues(new Value<>(Main.game.getNpc(TestNPC.class), SexSlotAllFours.ALL_FOURS))) {
+							@Override
+							public boolean isPublicSex() {
+								return false;
+							}
 							@Override
 							public SexPace getStartingSexPaceModifier(GameCharacter character) {
 								if(character.isPlayer()) {
@@ -422,8 +435,15 @@ public class TestNPC extends NPC {
 						new SMGeneric(
 								Util.newArrayListOfValues(Main.game.getPlayer()),
 								Util.newArrayListOfValues(Main.game.getNpc(TestNPC.class)),
-						null,
-						null), TEST_DIALOGUE_AFTER_SEX, "<p>"
+								null,
+								null) {
+							@Override
+							public boolean isPublicSex() {
+								return false;
+							}
+						},
+						TEST_DIALOGUE_AFTER_SEX,
+						"<p>"
 							+ "You step forwards, wrapping your [pc.arms] around the [test.race] and pulling [test.herHim] into you."
 						+ "</p>"
 						+ "<p>"
@@ -440,7 +460,12 @@ public class TestNPC extends NPC {
 								Util.newArrayListOfValues(Main.game.getNpc(TestNPC.class)),
 								null,
 								null,
-								ResponseTag.START_PACE_PLAYER_DOM_GENTLE),
+								ResponseTag.START_PACE_PLAYER_DOM_GENTLE) {
+							@Override
+							public boolean isPublicSex() {
+								return false;
+							}
+						},
 						TEST_DIALOGUE_AFTER_SEX,
 						"<p>"
 							+ "You step forwards, gently wrapping your [pc.arms] around the [test.race] and lovingly pulling [test.herHim] into you."
@@ -459,7 +484,12 @@ public class TestNPC extends NPC {
 								Util.newArrayListOfValues(Main.game.getNpc(TestNPC.class)),
 								null,
 								null,
-								ResponseTag.START_PACE_PLAYER_DOM_ROUGH),
+								ResponseTag.START_PACE_PLAYER_DOM_ROUGH) {
+							@Override
+							public boolean isPublicSex() {
+								return false;
+							}
+						},
 						TEST_DIALOGUE_AFTER_SEX,
 						"<p>"
 								+ "You step forwards, wrapping your [pc.arms] around the [test.race] and roughly pulling [test.herHim] into you."
@@ -495,7 +525,7 @@ public class TestNPC extends NPC {
 
 		@Override
 		public String getContent() {
-			if(Sex.getNumberOfOrgasms(Sex.getActivePartner()) >= 1) {
+			if(Main.game.getNpc(TestNPC.class).isSatisfiedFromLastSex()) {
 				return "<p>"
 							+ "The [test.race] collapses to the floor, sobbing."
 							+ " Grinning down at [test.her] despoiled body, you turn to the door and prepare to make your exit."
@@ -535,9 +565,9 @@ public class TestNPC extends NPC {
 
 		@Override
 		public String getContent() {
-			if(Sex.getNumberOfOrgasms(Sex.getActivePartner()) >= 1) {
+			if(Main.game.getNpc(TestNPC.class).isSatisfiedFromLastSex()) {
 				return "<p>"
-							+ "The [test.race] collapses to the floor, totally worn out and satisfied from the orgasm"+(Sex.getNumberOfOrgasms(Sex.getActivePartner()) > 1?"s":"")+" you gave to [test.herHim]."
+							+ "The [test.race] collapses to the floor, totally worn out and satisfied from the orgasm"+(Sex.getNumberOfOrgasms(Main.game.getNpc(TestNPC.class)) > 1?"s":"")+" you gave to [test.herHim]."
 							+ " Grinning down at [test.her] delicate body, you turn to the door and prepare to make your exit."
 							+ " As you reach for the handle, you turn around and chuckle,"
 							+ " [pc.speech(That was fun! Maybe I'll pay you another visit some time!)]"

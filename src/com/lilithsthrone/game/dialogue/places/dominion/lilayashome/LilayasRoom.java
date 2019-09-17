@@ -132,7 +132,7 @@ public class LilayasRoom {
 								Util.newHashMapOfValues(new Value<>(Main.game.getPlayer(), SexSlotMasturbation.KNEELING_PANTIES))) {
 							@Override
 							public String applyEndSexEffects() {
-								return Main.game.getPlayer().addClothing(LilayasRoom.lilayasPanties, false);
+								return Main.game.getPlayer().addClothing(LilayasRoom.lilayasPanties, 1, false, true);
 							}
 						},
 						null,
@@ -342,7 +342,9 @@ public class LilayasRoom {
 							}
 						},
 						null,
-						null, AFTER_ROSE_AS_DOM, UtilText.parseFromXMLFile("places/dominion/lilayasHome/lilayasRoom", "ROSE_AS_DOM")){
+						null,
+						AFTER_ROSE_AS_DOM,
+						UtilText.parseFromXMLFile("places/dominion/lilayasHome/lilayasRoom", "ROSE_AS_DOM")){
 					@Override
 					public void effects() {
 						Main.game.getTextEndStringBuilder().append(Main.game.getNpc(Rose.class).incrementAffection(Main.game.getPlayer(), 15));

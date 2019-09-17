@@ -83,15 +83,10 @@ import com.lilithsthrone.game.inventory.clothing.ClothingType;
 import com.lilithsthrone.game.inventory.enchanting.TFEssence;
 import com.lilithsthrone.game.inventory.weapon.AbstractWeaponType;
 import com.lilithsthrone.game.inventory.weapon.WeaponType;
-import com.lilithsthrone.game.sex.Sex;
-import com.lilithsthrone.game.sex.SexAreaInterface;
-import com.lilithsthrone.game.sex.SexAreaOrifice;
-import com.lilithsthrone.game.sex.SexAreaPenetration;
 import com.lilithsthrone.game.sex.SexPace;
 import com.lilithsthrone.game.sex.managers.dominion.SMBraxDoggy;
 import com.lilithsthrone.game.sex.managers.universal.SMStanding;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotAllFours;
-import com.lilithsthrone.game.sex.positions.slots.SexSlotLyingDown;
 import com.lilithsthrone.game.sex.positions.slots.SexSlotStanding;
 import com.lilithsthrone.main.Main;
 import com.lilithsthrone.utils.Colour;
@@ -139,8 +134,8 @@ public class Brax extends NPC {
 		}
 		if(Main.isVersionOlderThan(Main.VERSION_NUMBER, "0.3.0.6")) {
 			if(!Main.game.getDialogueFlags().values.contains(DialogueFlagValue.braxBeaten)) {
-				this.unequipMainWeaponIntoVoid();
-				this.unequipOffhandWeaponIntoVoid();
+				this.unequipMainWeaponIntoVoid(0);
+				this.unequipOffhandWeaponIntoVoid(0);
 				this.equipMainWeaponFromNowhere(AbstractWeaponType.generateWeapon(WeaponType.MELEE_CHAOS_EPIC, DamageType.FIRE));
 				this.equipOffhandWeaponFromNowhere(AbstractWeaponType.generateWeapon(WeaponType.OFFHAND_CHAOS_EPIC, DamageType.FIRE));
 			}
@@ -338,6 +333,18 @@ public class Brax extends NPC {
 	
 	@Override
 	public String getDescription() {
+		if(this.isSlave() && this.getOwner().isPlayer()) {
+			if(Main.game.getDialogueFlags().values.contains(DialogueFlagValue.bimbofiedBrax)) {
+				return "At one time being the 'Chief of Dominion Operations', [brax.name] is now no more than your slave.";
+			} else if(Main.game.getDialogueFlags().values.contains(DialogueFlagValue.feminisedBrax)) {
+				return "At one time being the 'Chief of Dominion Operations', [brax.name] ended up becoming Candi's slave, and under her ownership, [brax.she] was transformed into a wolf-girl."
+						+ " Eventually, after performing several tasks for the bimbo cat-girl Enforcer, you became [brax.namePos] new owner.";
+			} else {
+				return "At one time being the 'Chief of Dominion Operations', [brax.name] ended up becoming Candi's slave, and under her ownership, [brax.she] was transformed into a sex-obsessed bimbo wolf-girl."
+						+ " Eventually, after performing several tasks for the bimbo cat-girl Enforcer, you became [brax.namePos] new owner.";
+			}
+		}
+		
 		if(Main.game.getDialogueFlags().values.contains(DialogueFlagValue.bimbofiedBrax)) {
 			return "The one-time 'Chief of Dominion Operations', [brax.name] is now completely unrecognisable from [brax.her] former self."
 					+ " With some help from Candi, she's been transformed into a brain-dead bimbo, who can only think about where the next cock is coming from.";
@@ -355,6 +362,9 @@ public class Brax extends NPC {
 	
 	@Override
 	public void endSex() {
+		if(this.isSlave() && this.getOwner().isPlayer()) {
+			return;
+		}
 		setPendingClothingDressing(true);
 	}
 	
@@ -365,11 +375,17 @@ public class Brax extends NPC {
 
 	@Override
 	public SexPace getSexPaceDomPreference(){
+		if(this.isSlave() && this.getOwner().isPlayer()) {
+			return super.getSexPaceDomPreference();
+		}
 		return SexPace.DOM_ROUGH;
 	}
 	
 	@Override
 	public SexPace getSexPaceSubPreference(GameCharacter character){
+		if(this.isSlave() && this.getOwner().isPlayer()) {
+			return super.getSexPaceSubPreference(character);
+		}
 		if(Main.game.getDialogueFlags().values.contains(DialogueFlagValue.bimbofiedBrax)) {
 			return SexPace.SUB_EAGER;
 			
@@ -384,22 +400,24 @@ public class Brax extends NPC {
 	@Override
 	public String getSpeechColour() {
 		if(Main.getProperties().hasValue(PropertyValue.lightTheme)) {
-			if(Main.game.getDialogueFlags().values.contains(DialogueFlagValue.bimbofiedBrax)) {
-				return "#FF0AA5";
-			} else if(Main.game.getDialogueFlags().values.contains(DialogueFlagValue.feminisedBrax)) {
-				return "#C60AFF";
-			} else {
-				return "#1F35FF";
+			if(this.isFeminine()) {
+				if(Main.game.getDialogueFlags().values.contains(DialogueFlagValue.bimbofiedBrax)) {
+					return "#FF0AA5";
+				} else if(Main.game.getDialogueFlags().values.contains(DialogueFlagValue.feminisedBrax)) {
+					return "#C60AFF";
+				}
 			}
+			return "#1F35FF";
 			
 		} else {
-			if(Main.game.getDialogueFlags().values.contains(DialogueFlagValue.bimbofiedBrax)) {
-				return "#E36DE1";
-			} else if(Main.game.getDialogueFlags().values.contains(DialogueFlagValue.feminisedBrax)) {
-				return "#D79EFF";
-			} else {
-				return "#ADB4FF";
+			if(this.isFeminine()) {
+				if(Main.game.getDialogueFlags().values.contains(DialogueFlagValue.bimbofiedBrax)) {
+					return "#E36DE1";
+				} else if(Main.game.getDialogueFlags().values.contains(DialogueFlagValue.feminisedBrax)) {
+					return "#D79EFF";
+				}
 			}
+			return "#ADB4FF";
 		}
 	}
 
@@ -415,7 +433,10 @@ public class Brax extends NPC {
 	// Combat:
 	
 	@Override
-	public String getMainAttackDescription(GameCharacter target, boolean isHit) {
+	public String getMainAttackDescription(int armRow, GameCharacter target, boolean isHit) {
+		if(this.isSlave()) {
+			return super.getMainAttackDescription(armRow, target, isHit);
+		}
 		return "<p>"
 					+ UtilText.parse(target,
 						UtilText.returnStringAtRandom(
@@ -439,6 +460,9 @@ public class Brax extends NPC {
 			
 	@Override
 	public String getSpellDescription() {
+		if(this.isSlave()) {
+			return super.getSpellDescription();
+		}
 		return "<p>"
 				+ UtilText.returnStringAtRandom(
 						"With a grin, Brax focuses on the arcane fire swirling around his arm, and with a sudden thrust forwards, he casts a spell!",
@@ -1189,55 +1213,58 @@ public class Brax extends NPC {
 	}
 	
 
-	// Penetrations
-	@Override
-	public String getPenetrationDescription(boolean initialPenetration, GameCharacter characterPenetrating, SexAreaPenetration penetrationType, GameCharacter characterPenetrated, SexAreaInterface orifice) {
-		if(Math.random()>0.3) {
-			if(Sex.getSexPositionSlot(characterPenetrated)==SexSlotLyingDown.COWGIRL){
-				if(orifice == SexAreaOrifice.VAGINA) {
-					if(penetrationType == SexAreaPenetration.PENIS && characterPenetrated.equals(this)) {
-						return UtilText.returnStringAtRandom(
-								"You keep bouncing up and down, slamming [brax.namePos] [npc.penis+] in and out of your [pc.pussy+].",
-								"With lewd little moans, you continue bouncing up and down on [brax.namePos] [npc.penis+].",
-								"You feel [brax.namePos] [npc.penis+] lewdly spreading out your [pc.pussy+] as you ride him.",
-								"You let out a gasp as you carry on spearing your [pc.pussy+] on [brax.namePos] [npc.penis+].");
-					} else if(penetrationType == SexAreaPenetration.TONGUE && characterPenetrated.isPlayer()) {
-						return UtilText.returnStringAtRandom(
-								"You hold the top of [brax.namePos] head, moaning softly as he carries on eating you out.",
-								"With a little giggle, you grind your [pc.pussy+] down on [brax.namePos] wolf-like muzzle.",
-								"You feel [brax.namePos] tongue eagerly lapping away at your [pc.pussy+].",
-								"You sink down a little further onto [brax.namePos] face, letting out a delighted sigh as you feel his tongue spearing deep into your [pc.pussy+].");
-					}
-				}
-				
-				if(orifice == SexAreaOrifice.ANUS) {
-					if(penetrationType == SexAreaPenetration.PENIS && characterPenetrated.equals(this)) {
-						return UtilText.returnStringAtRandom(
-								"You keep bouncing up and down, slamming [brax.namePos] [npc.penis+] in and out of your [pc.asshole+].",
-								"With lewd little moans, you continue bouncing up and down on [brax.namePos] [npc.penis+].",
-								"You feel [brax.namePos] [npc.penis+] lewdly spreading out your [pc.asshole+] as you ride him.",
-								"You let out a gasp as you carry on spearing your [pc.asshole+] on [brax.namePos] [npc.penis+].");
-						
-					} else if(characterPenetrated.isPlayer()) {
-						return UtilText.returnStringAtRandom(
-								"You hold the top of [brax.namePos] head, moaning softly as he carries on licking your [pc.asshole+].",
-								"With a little giggle, you grind your [pc.asshole+] down on [brax.namePos] wolf-like muzzle.",
-								"You feel [brax.namePos] tongue eagerly lapping away at your [pc.asshole+].",
-								"You sink down a little further onto [brax.namePos] face, letting out a delighted sigh as you feel his tongue spearing deep into your [pc.asshole+].");
-					}
-				}
-			}
-			
-			if(penetrationType == SexAreaPenetration.PENIS && orifice == SexAreaOrifice.ANUS && characterPenetrated.equals(this)) {
-				return UtilText.returnStringAtRandom(
-						"You carry on slamming your [pc.penis+] into [brax.namePos] [npc.asshole+].",
-						"Holding his hips, you carry on fucking [brax.namePos] [npc.asshole+].",
-						"You feel [brax.namePos] [npc.asshole+] lewdly spreading out around your [pc.penis+] as you thrust into him.",
-						"[brax.name] gasps and groans as you carry on spearing your [pc.penis+] into his [npc.asshole+].");
-			}
-		}
-		
-		return super.getPenetrationDescription(initialPenetration, characterPenetrating, penetrationType, characterPenetrated, orifice);
-	}
+//	// Penetrations
+//	@Override
+//	public String getPenetrationDescription(boolean initialPenetration, GameCharacter characterPenetrating, SexAreaPenetration penetrationType, GameCharacter characterPenetrated, SexAreaInterface orifice) {
+//		if(this.isSlave()) {
+//			return super.getPenetrationDescription(initialPenetration, characterPenetrating, penetrationType, characterPenetrated, orifice);
+//		}
+//		if(Math.random()>0.3) {
+//			if(Sex.getSexPositionSlot(characterPenetrated)==SexSlotLyingDown.COWGIRL){
+//				if(orifice == SexAreaOrifice.VAGINA) {
+//					if(penetrationType == SexAreaPenetration.PENIS && characterPenetrated.equals(this)) {
+//						return UtilText.returnStringAtRandom(
+//								"You keep bouncing up and down, slamming [brax.namePos] [npc.penis+] in and out of your [pc.pussy+].",
+//								"With lewd little moans, you continue bouncing up and down on [brax.namePos] [npc.penis+].",
+//								"You feel [brax.namePos] [npc.penis+] lewdly spreading out your [pc.pussy+] as you ride him.",
+//								"You let out a gasp as you carry on spearing your [pc.pussy+] on [brax.namePos] [npc.penis+].");
+//					} else if(penetrationType == SexAreaPenetration.TONGUE && characterPenetrated.isPlayer()) {
+//						return UtilText.returnStringAtRandom(
+//								"You hold the top of [brax.namePos] head, moaning softly as he carries on eating you out.",
+//								"With a little giggle, you grind your [pc.pussy+] down on [brax.namePos] wolf-like muzzle.",
+//								"You feel [brax.namePos] tongue eagerly lapping away at your [pc.pussy+].",
+//								"You sink down a little further onto [brax.namePos] face, letting out a delighted sigh as you feel his tongue spearing deep into your [pc.pussy+].");
+//					}
+//				}
+//				
+//				if(orifice == SexAreaOrifice.ANUS) {
+//					if(penetrationType == SexAreaPenetration.PENIS && characterPenetrated.equals(this)) {
+//						return UtilText.returnStringAtRandom(
+//								"You keep bouncing up and down, slamming [brax.namePos] [npc.penis+] in and out of your [pc.asshole+].",
+//								"With lewd little moans, you continue bouncing up and down on [brax.namePos] [npc.penis+].",
+//								"You feel [brax.namePos] [npc.penis+] lewdly spreading out your [pc.asshole+] as you ride him.",
+//								"You let out a gasp as you carry on spearing your [pc.asshole+] on [brax.namePos] [npc.penis+].");
+//						
+//					} else if(characterPenetrated.isPlayer()) {
+//						return UtilText.returnStringAtRandom(
+//								"You hold the top of [brax.namePos] head, moaning softly as he carries on licking your [pc.asshole+].",
+//								"With a little giggle, you grind your [pc.asshole+] down on [brax.namePos] wolf-like muzzle.",
+//								"You feel [brax.namePos] tongue eagerly lapping away at your [pc.asshole+].",
+//								"You sink down a little further onto [brax.namePos] face, letting out a delighted sigh as you feel his tongue spearing deep into your [pc.asshole+].");
+//					}
+//				}
+//			}
+//			
+//			if(penetrationType == SexAreaPenetration.PENIS && orifice == SexAreaOrifice.ANUS && characterPenetrated.equals(this)) {
+//				return UtilText.returnStringAtRandom(
+//						"You carry on slamming your [pc.penis+] into [brax.namePos] [npc.asshole+].",
+//						"Holding his hips, you carry on fucking [brax.namePos] [npc.asshole+].",
+//						"You feel [brax.namePos] [npc.asshole+] lewdly spreading out around your [pc.penis+] as you thrust into him.",
+//						"[brax.name] gasps and groans as you carry on spearing your [pc.penis+] into his [npc.asshole+].");
+//			}
+//		}
+//		
+//		return super.getPenetrationDescription(initialPenetration, characterPenetrating, penetrationType, characterPenetrated, orifice);
+//	}
 	
 }
