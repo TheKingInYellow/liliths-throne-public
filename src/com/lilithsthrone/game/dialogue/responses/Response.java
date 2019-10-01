@@ -298,7 +298,7 @@ public class Response {
 			if(!Main.game.isInSex() && corruptionBypass==null) { // DO not allow bypass out of sex if there is no corruption bypassing
 				return false;
 			}
-			return !isCorruptionWithinRange();
+			return !isBaseCorruptionWithinRange();
 		}
 		
 		return false;
