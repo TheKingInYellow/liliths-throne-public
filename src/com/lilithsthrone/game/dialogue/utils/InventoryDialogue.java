@@ -8179,11 +8179,7 @@ public class InventoryDialogue {
 							continue;
 						}
 
-						if (c.getRarity() == Rarity.JINXED) {
-							continue;
-						}
-
-						if (c.getRarity() == Rarity.JINXED) {
+						if (c.getRarity() == Rarity.JINXED || c.isBadEnchantment() || c.isEnslavementClothing()) {
 							continue;
 						}
 
