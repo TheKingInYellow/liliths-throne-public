@@ -289,7 +289,7 @@ public class Response {
 	 */
 	public boolean isAbleToBypass(){
 		if(!isAvailable()
-				&& (!Main.game.isInSex() || Main.getProperties().hasValue(PropertyValue.bypassSexActions) || getSexActionType() == SexActionType.ORGASM)
+				&& (!Main.game.isInSex() || Main.getProperties().hasValue(PropertyValue.bypassSexActions) || getSexActionType() == SexActionType.ORGASM || isCorruptionWithinRange())
 				&& !isBlockedFromPerks()
 				&& isFemininityInRange()
 				&& isRequiredRace()
@@ -298,7 +298,7 @@ public class Response {
 			if(!Main.game.isInSex() && corruptionBypass==null) { // DO not allow bypass out of sex if there is no corruption bypassing
 				return false;
 			}
-			return !isBaseCorruptionWithinRange();
+			return true;
 		}
 		
 		return false;
