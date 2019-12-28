@@ -5420,10 +5420,11 @@ public class InventoryDialogue {
 							
 						} else if(index == 5) {
 							if(clothing.isSealed()) {
-								if(isAbleToRemoveJinxes()) {
+								if(getJinxRemovalBlockedResponse()==null) {
 									return new Response("Unjinx (<i>"+clothing.getJinxRemovalCost()+" Essences</i>)", "You can't unjinx clothing in combat!", null);
+									
 								} else {
-									return new Response("Unjinx", "You don't know how to remove jinxes! Perhaps you should pay Lilaya a visit...", null);
+									return getJinxRemovalBlockedResponse();
 								}
 							} else {
 								if(clothing.isCondom()) {
@@ -5512,7 +5513,7 @@ public class InventoryDialogue {
 							
 						} else if(index == 5) {
 							if(clothing.isSealed()) {
-								if(isAbleToRemoveJinxes()) {
+								if(getJinxRemovalBlockedResponse()==null) {
 									if(Main.game.getPlayer().getEssenceCount(TFEssence.ARCANE) >= clothing.getJinxRemovalCost()) {
 										return new Response("Unjinx ([style.italicsArcane("+clothing.getJinxRemovalCost()+" Essences)])",
 												"Spend "+clothing.getJinxRemovalCost()+" arcane essences on removing the jinx from this piece of clothing.", INVENTORY_MENU) {
@@ -5532,8 +5533,9 @@ public class InventoryDialogue {
 									} else {
 										return new Response("Unjinx (<i>"+clothing.getJinxRemovalCost()+" Essences</i>)", "You need at least "+clothing.getJinxRemovalCost()+" arcane essences in order to unjinx this piece of clothing!", null);
 									}
+									
 								} else {
-									return new Response("Unjinx", "You don't know how to remove jinxes! Perhaps you should pay Lilaya a visit...", null);
+									return getJinxRemovalBlockedResponse();
 								}
 							} else {
 								if(clothing.isCondom()) {
@@ -5712,7 +5714,7 @@ public class InventoryDialogue {
 							
 						} else if(index == 5) {
 							if(clothing.isSealed()) {
-								if(isAbleToRemoveJinxes()) {
+								if(getJinxRemovalBlockedResponse()==null) {
 									if(Main.game.getPlayer().getEssenceCount(TFEssence.ARCANE) >= clothing.getJinxRemovalCost()) {
 										return new Response("Unjinx ([style.italicsArcane("+clothing.getJinxRemovalCost()+" Essences)])",
 												"Spend "+clothing.getJinxRemovalCost()+" arcane essences on removing the jinx from this piece of clothing.",
@@ -5737,7 +5739,7 @@ public class InventoryDialogue {
 										return new Response("Unjinx (<i>"+clothing.getJinxRemovalCost()+" Essences</i>)", "You need at least "+clothing.getJinxRemovalCost()+" arcane essences in order to unjinx a piece of clothing!", null);
 									}
 								} else {
-									return new Response("Unjinx", "You don't know how to remove jinxes! Perhaps you should pay Lilaya a visit...", null);
+									return getJinxRemovalBlockedResponse();
 								}
 							} else {
 								if(clothing.isCondom()) {
@@ -5833,10 +5835,10 @@ public class InventoryDialogue {
 							
 						} else if(index == 5) {
 							if(clothing.isSealed()) {
-								if(isAbleToRemoveJinxes()) {
+								if(getJinxRemovalBlockedResponse()==null) {
 									return new Response("Unjinx (<i>"+clothing.getJinxRemovalCost()+" Essences</i>)", "You can't unjinx someone's clothing while fighting them!", null);
 								} else {
-									return new Response("Unjinx", "You don't know how to remove jinxes! Perhaps you should pay Lilaya a visit...", null);
+									return getJinxRemovalBlockedResponse();
 								}
 							} else {
 								if(clothing.isCondom()) {
@@ -5954,7 +5956,7 @@ public class InventoryDialogue {
 							
 						} else if(index == 5) {
 							if(clothing.isSealed()) {
-								if(isAbleToRemoveJinxes()) {
+								if(getJinxRemovalBlockedResponse()==null) {
 									if(Main.game.getPlayer().getEssenceCount(TFEssence.ARCANE) >= clothing.getJinxRemovalCost()) {
 										return new Response("Unjinx ([style.italicsArcane("+clothing.getJinxRemovalCost()+" Essences)])",
 												"Spend "+clothing.getJinxRemovalCost()+" arcane essences on removing the jinx from this piece of clothing.", INVENTORY_MENU) {
@@ -5975,7 +5977,7 @@ public class InventoryDialogue {
 										return new Response("Unjinx (<i>"+clothing.getJinxRemovalCost()+" Essences</i>)", "You need at least "+clothing.getJinxRemovalCost()+" arcane essences in order to unjinx this piece of clothing!", null);
 									}
 								} else {
-									return new Response("Unjinx", "You don't know how to remove jinxes! Perhaps you should pay Lilaya a visit...", null);
+									return getJinxRemovalBlockedResponse();
 								}
 							} else {
 								if(clothing.isCondom()) {
@@ -6112,7 +6114,7 @@ public class InventoryDialogue {
 							
 						} else if(index == 5) {
 							if(clothing.isSealed()) {
-								if(isAbleToRemoveJinxes()) {
+								if(getJinxRemovalBlockedResponse()==null) {
 									if(Main.game.getPlayer().getEssenceCount(TFEssence.ARCANE) >= clothing.getJinxRemovalCost()) {
 										return new Response("Unjinx ([style.italicsArcane("+clothing.getJinxRemovalCost()+" Essences)])",
 												"Spend "+clothing.getJinxRemovalCost()+" arcane essences on removing the jinx from this piece of clothing.", Sex.SEX_DIALOGUE) {
@@ -6136,7 +6138,7 @@ public class InventoryDialogue {
 										return new Response("Unjinx (<i>"+clothing.getJinxRemovalCost()+" Essences</i>)", "You need at least "+clothing.getJinxRemovalCost()+" arcane essences in order to unjinx this piece of clothing!", null);
 									}
 								} else {
-									return new Response("Unjinx", "You don't know how to remove jinxes! Perhaps you should pay Lilaya a visit...", null);
+									return getJinxRemovalBlockedResponse();
 								}
 							} else {
 								if(clothing.isCondom()) {
@@ -6289,6 +6291,7 @@ public class InventoryDialogue {
 	private static void resetWeaponDyeColours() {
 		dyePreviewPrimary = weapon.getPrimaryColour();
 		dyePreviewSecondary = weapon.getSecondaryColour();
+		dyePreviewTertiary = weapon.getTertiaryColour();
 		
 		damageTypePreview = weapon.getDamageType();
 	}
@@ -6462,18 +6465,17 @@ public class InventoryDialogue {
 				+ "<div class='container-full-width'>"
 					+ "<div class='inventoryImage'>"
 						+ "<div class='inventoryImage-content'>"
-							+ weapon.getWeaponType().getSVGImage(damageTypePreview, dyePreviewPrimary, dyePreviewSecondary)
+							+ weapon.getWeaponType().getSVGImage(damageTypePreview, dyePreviewPrimary, dyePreviewSecondary, dyePreviewTertiary)
 						+ "</div>"
 					+ "</div>"
 					+ "<h3 style='text-align:center;'><b>Dye & Preview</b></h3>");
 		
 		
-		inventorySB.append("<div class='container-quarter-width' style='text-align:center;'>"
-				+ "<b>Damage type:</b>");
+		inventorySB.append("<div class='container-quarter-width' style='text-align:center;width:calc(75% - 16px);'>"
+				+ "<b>Damage type:</b><br/>");
 		for(DamageType dt : weapon.getWeaponType().getAvailableDamageTypes()) {
-			inventorySB.append("<br/>"
-					+ "<div class='normal-button"+(damageTypePreview==dt?" selected":"")+"' id='DAMAGE_TYPE_" + weapon.getWeaponType().hashCode() + "_" + dt.toString() + "'"
-							+ "style='width:75%; color:"+(damageTypePreview==dt?dt.getColour().toWebHexString():dt.getColour().getShades(8)[0])+";'>"
+			inventorySB.append("<div class='normal-button"+(damageTypePreview==dt?" selected":"")+"' id='DAMAGE_TYPE_" + weapon.getWeaponType().hashCode() + "_" + dt.toString() + "'"
+							+ "style='width:20%; margin:0 2.5%; color:"+(damageTypePreview==dt?dt.getColour().toWebHexString():dt.getColour().getShades(8)[0])+";'>"
 						+ Util.capitaliseSentence(dt.getName())
 					+ "</div>");
 		}
@@ -6482,7 +6484,7 @@ public class InventoryDialogue {
 		boolean colourOptions = false;
 		if(!weapon.getWeaponType().getAllAvailablePrimaryColours().isEmpty()) {
 			colourOptions = true;
-			inventorySB.append("<div class='container-quarter-width'>"
+			inventorySB.append("<div class='container-quarter-width' style='width:calc(75% - 16px);'>"
 					+ "Primary:<br/>");
 			
 			for (Colour c : weapon.getWeaponType().getAllAvailablePrimaryColours()) {
@@ -6501,11 +6503,28 @@ public class InventoryDialogue {
 		
 		if(!weapon.getWeaponType().getAllAvailableSecondaryColours().isEmpty()) {
 			colourOptions = true;
-			inventorySB.append("<div class='container-quarter-width'>"
+			inventorySB.append("<div class='container-quarter-width' style='width:calc(75% - 16px);'>"
 					+ "Secondary:<br/>");
 			for (Colour c : weapon.getWeaponType().getAllAvailableSecondaryColours()) {
 				inventorySB.append("<div class='normal-button"+(dyePreviewSecondary==c?" selected":"")+"' id='SECONDARY_" + (weapon.getWeaponType().hashCode() + "_" + c.toString()) + "'"
 									+ " style='width:auto; margin-right:4px;"+(dyePreviewSecondary==c?" background-color:"+Colour.BASE_GREEN.getShades()[4]+";":"")+"'>"
+								+ "<div class='phone-item-colour' style='"
+									+ (c.isMetallic()
+											?"background: repeating-linear-gradient(135deg, " + c.toWebHexString() + ", " + c.getShades()[4] + " 10px);"
+											:"background-color:" + c.toWebHexString() + ";")
+									+ "'></div>"
+					+ "</div>");
+			}
+			inventorySB.append("</div>");
+		}
+
+		if(!weapon.getWeaponType().getAllAvailableTertiaryColours().isEmpty()) {
+			colourOptions = true;
+			inventorySB.append("<div class='container-quarter-width' style='width:calc(75% - 16px);'>"
+					+ "Tertiary:<br/>");
+			for (Colour c : weapon.getWeaponType().getAllAvailableTertiaryColours()) {
+				inventorySB.append("<div class='normal-button"+(dyePreviewTertiary==c?" selected":"")+"' id='TERTIARY_" + (weapon.getWeaponType().hashCode() + "_" + c.toString()) + "'"
+									+ " style='width:auto; margin-right:4px;"+(dyePreviewTertiary==c?" background-color:"+Colour.BASE_GREEN.getShades()[4]+";":"")+"'>"
 								+ "<div class='phone-item-colour' style='"
 									+ (c.isMetallic()
 											?"background: repeating-linear-gradient(135deg, " + c.toWebHexString() + ", " + c.getShades()[4] + " 10px);"
@@ -6943,7 +6962,10 @@ public class InventoryDialogue {
 				return new Response("Back", "Return to the previous menu.", CLOTHING_INVENTORY);
 
 			} else if (index == 1) {
-				if(dyePreviewPrimary == clothing.getColour() && dyePreviewSecondary == clothing.getSecondaryColour() && dyePreviewTertiary == clothing.getTertiaryColour() && dyePreviewPattern.equals(clothing.getPattern())) {
+				if(dyePreviewPrimary == clothing.getColour()
+						&& dyePreviewSecondary == clothing.getSecondaryColour()
+						&& dyePreviewTertiary == clothing.getTertiaryColour()
+						&& dyePreviewPattern.equals(clothing.getPattern())) {
 					return new Response("Dye",
 							"You need to choose different colours before being able to dye the " + clothing.getName() + "!",
 							null); 
@@ -6991,7 +7013,10 @@ public class InventoryDialogue {
 				return new Response("Back", "Return to the previous menu.", CLOTHING_EQUIPPED);
 
 			} else if (index  == 1) {
-				if(dyePreviewPrimary == clothing.getColour() && dyePreviewSecondary == clothing.getSecondaryColour() && dyePreviewTertiary == clothing.getTertiaryColour() && dyePreviewPattern.equals(clothing.getPattern())) {
+				if(dyePreviewPrimary == clothing.getColour()
+						&& dyePreviewSecondary == clothing.getSecondaryColour()
+						&& dyePreviewTertiary == clothing.getTertiaryColour()
+						&& dyePreviewPattern.equals(clothing.getPattern())) {
 					return new Response("Dye",
 							"You need to choose different colours before being able to dye the " + clothing.getName() + "!",
 							null); 
@@ -7042,7 +7067,9 @@ public class InventoryDialogue {
 							null); 
 				}
 				
-				if(dyePreviewPrimary == weapon.getPrimaryColour() && dyePreviewSecondary == weapon.getSecondaryColour()) {
+				if(dyePreviewPrimary == weapon.getPrimaryColour()
+						&& dyePreviewSecondary == weapon.getSecondaryColour()
+						&& dyePreviewTertiary == weapon.getTertiaryColour()) {
 					return new Response("Dye",
 							"You need to choose different colours before being able to dye the " + weapon.getName() + "!",
 							null); 
@@ -7084,6 +7111,7 @@ public class InventoryDialogue {
 							AbstractWeapon dyedWeapon = AbstractWeaponType.generateWeapon(weapon);
 							dyedWeapon.setPrimaryColour(dyePreviewPrimary);
 							dyedWeapon.setSecondaryColour(dyePreviewSecondary);
+							dyedWeapon.setTertiaryColour(dyePreviewTertiary);
 							owner.addWeapon(dyedWeapon, false);
 							Main.game.addEvent(new EventLogEntry(Main.game.getMinutesPassed(), "Dyed", dyedWeapon.getDisplayName(true)), false);
 
@@ -7092,6 +7120,7 @@ public class InventoryDialogue {
 							AbstractWeapon dyedWeapon = AbstractWeaponType.generateWeapon(weapon);
 							dyedWeapon.setPrimaryColour(dyePreviewPrimary);
 							dyedWeapon.setSecondaryColour(dyePreviewSecondary);
+							dyedWeapon.setTertiaryColour(dyePreviewTertiary);
 							Main.game.getPlayerCell().getInventory().addWeapon(dyedWeapon);
 							Main.game.addEvent(new EventLogEntry(Main.game.getMinutesPassed(), "Dyed", dyedWeapon.getDisplayName(true)), false);
 						}
@@ -7177,7 +7206,9 @@ public class InventoryDialogue {
 							null); 
 				}
 				
-				if(dyePreviewPrimary == weapon.getPrimaryColour() && dyePreviewSecondary == weapon.getSecondaryColour()) {
+				if(dyePreviewPrimary == weapon.getPrimaryColour()
+						&& dyePreviewSecondary == weapon.getSecondaryColour()
+						&& dyePreviewTertiary == weapon.getTertiaryColour()) {
 					return new Response("Dye & reforge",
 							"You need to choose different colours before being able to dye the " + weapon.getName() + "!",
 							null); 
@@ -7247,7 +7278,9 @@ public class InventoryDialogue {
 				};
 
 			} else if (index == 6) {
-				if(dyePreviewPrimary == weapon.getPrimaryColour() && dyePreviewSecondary == weapon.getSecondaryColour()) {
+				if(dyePreviewPrimary == weapon.getPrimaryColour()
+						&& dyePreviewSecondary == weapon.getSecondaryColour()
+						&& dyePreviewTertiary == weapon.getTertiaryColour()) {
 					return new Response("Dye all (stack)",
 							"You need to choose different colours before being able to dye the " + weapon.getName() + "!",
 							null); 
@@ -7431,7 +7464,9 @@ public class InventoryDialogue {
 							null); 
 				}
 				
-				if(dyePreviewPrimary == weapon.getPrimaryColour() && dyePreviewSecondary == weapon.getSecondaryColour()) {
+				if(dyePreviewPrimary == weapon.getPrimaryColour()
+						&& dyePreviewSecondary == weapon.getSecondaryColour()
+						&& dyePreviewTertiary == weapon.getTertiaryColour()) {
 					return new Response("Dye & reforge all (stack)",
 							"You need to choose different colours before being able to dye the " + weapon.getName() + "!",
 							null); 
@@ -7536,7 +7571,9 @@ public class InventoryDialogue {
 				};
 
 			} else if (index == 11) {
-				if(dyePreviewPrimary == weapon.getPrimaryColour() && dyePreviewSecondary == weapon.getSecondaryColour()) {
+				if(dyePreviewPrimary == weapon.getPrimaryColour()
+						&& dyePreviewSecondary == weapon.getSecondaryColour()
+						&& dyePreviewTertiary == weapon.getTertiaryColour()) {
 					return new Response("Dye all",
 							"You need to choose different colours before being able to dye the " + weapon.getName() + "!",
 							null); 
@@ -7755,7 +7792,9 @@ public class InventoryDialogue {
 							null); 
 				}
 				
-				if(dyePreviewPrimary == weapon.getPrimaryColour() && dyePreviewSecondary == weapon.getSecondaryColour()) {
+				if(dyePreviewPrimary == weapon.getPrimaryColour()
+						&& dyePreviewSecondary == weapon.getSecondaryColour()
+						&& dyePreviewTertiary == weapon.getTertiaryColour()) {
 					return new Response("Dye & reforge all",
 							"You need to choose different colours before being able to dye the " + weapon.getName() + "!",
 							null); 
@@ -7906,7 +7945,9 @@ public class InventoryDialogue {
 							null); 
 				}
 				
-				if(dyePreviewPrimary == weapon.getPrimaryColour() && dyePreviewSecondary == weapon.getSecondaryColour()) {
+				if(dyePreviewPrimary == weapon.getPrimaryColour()
+						&& dyePreviewSecondary == weapon.getSecondaryColour()
+						&& dyePreviewTertiary == weapon.getTertiaryColour()) {
 					return new Response("Dye",
 							"You need to choose different colours before being able to dye the " + weapon.getName() + "!",
 							null); 
@@ -7952,6 +7993,7 @@ public class InventoryDialogue {
 							AbstractWeapon modifiedWeapon = AbstractWeaponType.generateWeapon(weapon);
 							modifiedWeapon.setPrimaryColour(dyePreviewPrimary);
 							modifiedWeapon.setSecondaryColour(dyePreviewSecondary);
+							modifiedWeapon.setTertiaryColour(dyePreviewTertiary);
 							// For some reason, if you add the modifiedWeapon directly, it won't stack with other identical weapons... Have to generateWeapon(modifiedWeapon) again to get it to start stacking properly:
 							owner.equipMainWeaponFromNowhere(AbstractWeaponType.generateWeapon(modifiedWeapon));
 							
@@ -7960,6 +8002,7 @@ public class InventoryDialogue {
 							AbstractWeapon modifiedWeapon = AbstractWeaponType.generateWeapon(weapon);
 							modifiedWeapon.setPrimaryColour(dyePreviewPrimary);
 							modifiedWeapon.setSecondaryColour(dyePreviewSecondary);
+							modifiedWeapon.setTertiaryColour(dyePreviewTertiary);
 							// For some reason, if you add the modifiedWeapon directly, it won't stack with other identical weapons... Have to generateWeapon(modifiedWeapon) again to get it to start stacking properly:
 							owner.equipOffhandWeaponFromNowhere(AbstractWeaponType.generateWeapon(modifiedWeapon));
 						}
@@ -8050,7 +8093,9 @@ public class InventoryDialogue {
 							null); 
 				}
 				
-				if(dyePreviewPrimary == weapon.getPrimaryColour() && dyePreviewSecondary == weapon.getSecondaryColour()) {
+				if(dyePreviewPrimary == weapon.getPrimaryColour()
+						&& dyePreviewSecondary == weapon.getSecondaryColour()
+						&& dyePreviewTertiary == weapon.getTertiaryColour()) {
 					return new Response("Dye & reforge",
 							"You need to choose different colours before being able to dye the " + weapon.getName() + "!",
 							null); 
@@ -8330,8 +8375,21 @@ public class InventoryDialogue {
 //		}
 	}
 	
-	private static boolean isAbleToRemoveJinxes() {
-		return Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_ENCHANTMENT_DISCOVERY);
+	private static Response getJinxRemovalBlockedResponse() {
+		if(!Main.game.getPlayer().isQuestCompleted(QuestLine.SIDE_ENCHANTMENT_DISCOVERY)) {
+			return new Response("Unjinx", "You don't know how to remove jinxes! Perhaps you should pay Lilaya a visit and ask her about it...", null);
+		}
+		if(Main.game.getPlayer().getClothingCurrentlyEquipped().stream().anyMatch(c -> c.isSelfTransformationInhibiting())) {
+			return new Response("Unjinx",
+					"Although you are normally able to unjinx clothing, you cannot do so due to an enchantment on one or more pieces of your equipped clothing!",
+					null);
+		}
+		if(Main.game.getPlayer().getTattoos().values().stream().anyMatch(c -> c.isSelfTransformationInhibiting())) {
+			return new Response("Unjinx",
+					"Although you are normally able to unjinx clothing, you cannot do so due to an enchantment on one or more of your tattoos!",
+					null);
+		}
+		return null;
 	}
 	
 	
