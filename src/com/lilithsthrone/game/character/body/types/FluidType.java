@@ -1,5 +1,4 @@
 package com.lilithsthrone.game.character.body.types;
-
 import java.util.List;
 
 import com.lilithsthrone.game.character.GameCharacter;
