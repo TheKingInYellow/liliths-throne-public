@@ -1,4 +1,5 @@
 package com.lilithsthrone.game.character.race;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

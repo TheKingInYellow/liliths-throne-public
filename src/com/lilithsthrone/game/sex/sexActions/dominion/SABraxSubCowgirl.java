@@ -1,4 +1,5 @@
 package com.lilithsthrone.game.sex.sexActions.dominion;
+
 import java.util.List;
 
 import com.lilithsthrone.game.character.GameCharacter;

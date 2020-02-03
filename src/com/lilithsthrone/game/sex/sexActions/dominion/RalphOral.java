@@ -1,4 +1,5 @@
 package com.lilithsthrone.game.sex.sexActions.dominion;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
